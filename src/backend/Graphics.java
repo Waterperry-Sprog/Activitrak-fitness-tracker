@@ -27,10 +27,10 @@ public class Graphics extends Application{
                 new LineChart<Number,Number>(xAxis,yAxis);
         lineChart.setTitle("Sample HR vs. time graph");
 		
-        XYChart.Series series = new XYChart.Series();
+        XYChart.Series<Number,Number> series = new XYChart.Series<Number,Number>();
         
         for (int i = 0; i < classx.size(); i++) {
-        	series.getData().add( new XYChart.Data( classx.get(i)/60, classy.get(i) ) );
+        	series.getData().add( new XYChart.Data<Number,Number>( classx.get(i)/60, classy.get(i) ) );
 		}
         
         
@@ -38,7 +38,6 @@ public class Graphics extends Application{
         lineChart.getData().add(series);
         
         Scene scene  = new Scene(lineChart, 800, 600);
-        lineChart.getData().add(series);
         arg0.setScene(scene);
         arg0.show();
 	}

@@ -72,10 +72,10 @@ public class DataHandler {
 		String prefix = System.getProperty("user.dir");
 		String filePath = prefix+"\\src\\backend\\"+""+"sample_data_suunto.csv";
 		suunto.importDataFromFile(filePath);
-		//suunto.printTables();
+		suunto.printTables();
 		
 		//launch graphics window
-		//Graphics.display(time, heartRate);
+		Graphics.display(time, heartRate);
 		
 		//test sorting algorithm
 		Vector<Integer> test = new Vector<Integer>();
@@ -86,21 +86,22 @@ public class DataHandler {
 		System.out.println(test.toString());
 		System.out.println(Operations.sort(test).toString());
 		
-		System.out.println("Started sorting heart rate vector at " + System.nanoTime());
+		System.out.println("Started sorting heart rate vector.");
 		Operations.sort(heartRate);
-		System.out.println("Sorted heart rate vector at " + System.nanoTime());
+		System.out.println("Sorted heart rate vector.");
 		
 		Vector<Integer> inputList = new Vector<Integer>();
 
-		//generate random data
 		
+		
+		//generate random data
+		/*
 		for(int i = 0; i<10000000; i++) {
 			inputList.add( (int)(Math.random()*10000000) );	//add 10 million values between 1 and 10 million.
 		}
-		
+		*/
 		
 		//generate totally unsorted data
-		/*
 		int lastAddedNumber = 999999999;
 		for(int i = 0; i<10000000; i++) {
 			int numToAdd = (int) Math.random()*10000000;
@@ -111,14 +112,23 @@ public class DataHandler {
 			else {
 				i--;
 			}
+		}
+		
+		//generate totally sorted data
+		/*
+		int i = 0;
+		while(i < 10000000) {
+			inputList.add(i++);
 		}*/
+		
+		
 		System.out.println("Size of array is " + inputList.size() + " (should be 10 million).");
 		
 		long startTime = System.nanoTime();
-		System.out.println("Started to sort random data at " + startTime);
+		System.out.println("Started to sort random data.");
 		Operations.sort(inputList);
 		long endTime = System.nanoTime();
-		System.out.println("Finished sorting random data at " + endTime);
+		System.out.println("Finished sorting random data.");
 		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
 	}
 }
