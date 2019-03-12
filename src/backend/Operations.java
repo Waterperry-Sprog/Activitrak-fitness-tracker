@@ -26,7 +26,6 @@ public class Operations {
 		return (x%2 == 0)?(true):(false);
 	}
 	
-	
 	//from here, refactor
 	private static Vector<Integer> listToSort = new Vector<Integer>();
 	

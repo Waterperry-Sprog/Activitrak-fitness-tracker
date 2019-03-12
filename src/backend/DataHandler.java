@@ -67,68 +67,59 @@ public class DataHandler {
 		}
 	}
 	
+	
+	//driver method
 	public static void main(String[] args) {
 		DataHandler suunto = new DataHandler();
 		String prefix = System.getProperty("user.dir");
 		String filePath = prefix+"\\src\\backend\\"+""+"sample_data_suunto.csv";
 		suunto.importDataFromFile(filePath);
-		suunto.printTables();
+		//suunto.printTables();
 		
 		//launch graphics window
 		Graphics.display(time, heartRate);
-		
-		//test sorting algorithm
-		Vector<Integer> test = new Vector<Integer>();
-		int[] array = {1,77,345,3,344,3452345,21,234};
-		for (int a : array) {
-			test.add(a);
-		}
-		System.out.println(test.toString());
-		System.out.println(Operations.sort(test).toString());
-		
-		System.out.println("Started sorting heart rate vector.");
-		Operations.sort(heartRate);
-		System.out.println("Sorted heart rate vector.");
-		
+		System.out.println("");
 		Vector<Integer> inputList = new Vector<Integer>();
-
-		
-		
+		String dataType = "";
 		//generate random data
-		/*
+		
+		dataType = "pseudo-random";
 		for(int i = 0; i<10000000; i++) {
 			inputList.add( (int)(Math.random()*10000000) );	//add 10 million values between 1 and 10 million.
 		}
-		*/
+		
 		
 		//generate totally unsorted data
+		/*
+		dataType = "totally unsorted";
 		int lastAddedNumber = 999999999;
-		for(int i = 0; i<10000000; i++) {
+		for(int i = 0; i<10000000;) {
 			int numToAdd = (int) Math.random()*10000000;
 			if(numToAdd <= lastAddedNumber) {
 				inputList.add(numToAdd);
 				lastAddedNumber = numToAdd;
-			}
-			else {
-				i--;
+				i++;
 			}
 		}
+		*/
 		
 		//generate totally sorted data
 		/*
 		int i = 0;
+		dataType = "totally sorted";
 		while(i < 10000000) {
 			inputList.add(i++);
-		}*/
+		}
+		*/
 		
 		
 		System.out.println("Size of array is " + inputList.size() + " (should be 10 million).");
 		
 		long startTime = System.nanoTime();
-		System.out.println("Started to sort random data.");
+		System.out.println("Started to sort "+dataType+" data.");
 		Operations.sort(inputList);
 		long endTime = System.nanoTime();
-		System.out.println("Finished sorting random data.");
+		System.out.println("Finished sorting data.");
 		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
 	}
 }
