@@ -18,7 +18,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * this method parses HR/time data from a Suunto CSV file.
+	 * this method parses HR/time data from a Suunto CSV file. Apple Health, 
 	 * @param file the file to parse
 	 */
 	public void importDataFromFile(String fileName) {
@@ -41,7 +41,7 @@ public class DataHandler {
 			int indexOfHrData = 0;
 			int timeDataPair = 0;
 			//work out which column the HR data is stored in (suunto records HR data 1 time per second so time can
-			//be calculated by delta line number.
+			//be calculated by delta line number).
 			String[] splitLine = line.split(",");
 			for (int i = 0; i < splitLine.length; i++) {
 				if(splitLine[i].equals("HeartRate")) {
@@ -81,16 +81,16 @@ public class DataHandler {
 		System.out.println("");
 		Vector<Integer> inputList = new Vector<Integer>();
 		String dataType = "";
+		/*
 		//generate random data
-		
+		System.out.println("Populating array.");
 		dataType = "pseudo-random";
 		for(int i = 0; i<10000000; i++) {
 			inputList.add( (int)(Math.random()*10000000) );	//add 10 million values between 1 and 10 million.
-		}
-		
+		}*/
 		
 		//generate totally unsorted data
-		/*
+		
 		dataType = "totally unsorted";
 		int lastAddedNumber = 999999999;
 		for(int i = 0; i<10000000;) {
@@ -101,7 +101,7 @@ public class DataHandler {
 				i++;
 			}
 		}
-		*/
+		
 		
 		//generate totally sorted data
 		/*
@@ -114,6 +114,7 @@ public class DataHandler {
 		
 		
 		System.out.println("Size of array is " + inputList.size() + " (should be 10 million).");
+		System.out.println("Worst case 70 million swaps.");
 		
 		long startTime = System.nanoTime();
 		System.out.println("Started to sort "+dataType+" data.");
