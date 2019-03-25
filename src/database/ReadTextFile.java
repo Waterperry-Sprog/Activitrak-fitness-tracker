@@ -2,23 +2,18 @@ package database;
 
 import java.io.*;
 
-public class ReadTextFile 
-{
-	public static void main(String[] args) 
-    {
-        try 
-        {
+public class ReadTextFile {
+	public static void main(String[] args) {
+        try {
         	System.out.println("Please enter a username: ");
     		String user;
     		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     		
-    		try 
-    		{
+    		try {
     			user = reader.readLine();
     		} 
     		
-    		catch (IOException e) 
-    		{
+    		catch (IOException e) {
     			user = "Unknown";
     		}
         	
@@ -27,8 +22,7 @@ public class ReadTextFile
  
             String line;
  
-            while ((line = bufferedReader.readLine()) != null) 
-            {
+            while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
             }
             
@@ -36,8 +30,7 @@ public class ReadTextFile
  
         } 
         
-        catch (IOException e) 
-        {
+        catch (IOException e) {
             System.err.println("File does not exist!");
             System.exit(0);
         }

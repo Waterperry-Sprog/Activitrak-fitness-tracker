@@ -2,25 +2,22 @@ package database;
 
 import java.io.*;
 
-public class WriteTextFile 
-{
-	public static void main(String[] args) 
-    {
-        try 
-        {
+public class WriteTextFile {
+	public static void main(String[] args) {
+        try {
         	System.out.println("Please enter a username: ");
-    		String user;
+    		String user = "";
     		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     		
-    		try 
-    		{
+    		try {			//TODO two try catch's necessary? can't just catch 2 errors?
     			user = reader.readLine();
+    			
     			//Need to compare file names already existing
     		} 
     		
-    		catch (IOException e) 
-    		{
-    			user = "Unknown";
+    		catch (IOException e) {
+    			System.out.println("Error reading username.");
+    			System.exit(1);
     		}
 
             System.out.println("Please enter your data;");
@@ -34,8 +31,7 @@ public class WriteTextFile
             int c_age = Integer.parseInt(age);
             
             
-            while(c_age <= 13)
-            {
+            while(c_age <= 13) {
             	System.err.print("You are too young to use the app.");
             	age = "";
             	System.out.println("Age:");
@@ -46,8 +42,7 @@ public class WriteTextFile
             System.out.println("Gender (M/F):");
             String gender = reader.readLine();
             /*
-            while(!(gender.equals("M")) || !(gender.equals("F")))
-            {
+            while(!(gender.equals("M")) || !(gender.equals("F"))) {
             	System.err.print("Invalid gender");
             	gender = "";
             	System.out.println("Gender (M/F):");
@@ -60,8 +55,7 @@ public class WriteTextFile
             int c_steps = Integer.parseInt(steps);
             
             
-            while(c_steps < 0)
-            {
+            while(c_steps < 0) {
             	System.err.print("Invalid step count.");
             	steps = "";
             	System.out.println("Steps taken:");
@@ -74,8 +68,7 @@ public class WriteTextFile
             int c_calories = Integer.parseInt(calories);
            
             
-            while(c_calories <= 0)
-            {
+            while(c_calories <= 0) {
             	System.err.print("Invalid calorie input");
             	calories = "";
             	System.out.println("Calories (kcal):");
@@ -87,8 +80,7 @@ public class WriteTextFile
             String water = reader.readLine();
             int c_water = Integer.parseInt(water);
              
-            while(c_water < 0)
-            {
+            while(c_water < 0) {
             	System.err.print("Invalid input");
             	water = "";
             	System.out.println("Water (litres):");
@@ -103,15 +95,13 @@ public class WriteTextFile
             
         } 
         
-        catch (IOException e) 
-        {
+        catch (IOException e) {
             e.printStackTrace();
         }
  
     }
     
-    public static void writeData(String user, String name,String age,String gender,String steps,String calories,String water) throws IOException
-    {
+    public static void writeData(String user, String name,String age,String gender,String steps,String calories,String water) throws IOException{
     	FileWriter writer = new FileWriter(user + ".txt", true);
     	BufferedWriter bufferedWriter = new BufferedWriter(writer);
     	
@@ -135,27 +125,22 @@ public class WriteTextFile
         bufferedWriter.close();
     }
     
-    public static void updateData(String user, String name, String age, String gender, String steps, String calories, String water, String res) throws IOException
-    {
+    public static void updateData(String user, String name, String age, String gender, String steps, String calories, String water, String res) throws IOException {
     	
-    	if(res.equals("Y"))
-        {
+    	if(res.equals("Y")) {
         	writeData(user, name, age, gender, steps, calories, water);
         	System.out.println("Data submitted");
             return;
         }
 
-        else 
-        {
+        else {
         	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         	
-        	while(!(res.equals("Y")))
-        	{
+        	while(!(res.equals("Y"))) {
         		System.out.println("What do you want to change?:");
             	String change = reader.readLine();
 
-            	switch(change)
-            	{
+            	switch(change) {
             		case "user":
             		{
             			System.out.println("Username:");
