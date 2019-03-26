@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.sql.ResultSetMetaData;
 
 public class WriteToDatabase {
-    private static String dbURL = "jdbc:derby:C:\\Users\\tband\\OneDrive\\Documents\\GitHub\\CSED-2\\src\\database\\newDerby;create=false";
+    private static String dbURL = "jdbc:derby:C:\\Users\\tband\\OneDrive\\Documents\\GitHub\\CSED-2\\src\\database\\newDerby;create=false";	//change this to the required path
     private static String tableName = "USERS";
     // jdbc Connection
     private static Connection conn = null;
