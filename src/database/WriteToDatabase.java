@@ -6,33 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSetMetaData;
 
-
 public class WriteToDatabase {
     private static String dbURL = "jdbc:derby:C:\\Users\\tband\\OneDrive\\Documents\\GitHub\\CSED-2\\src\\database\\newDerby;create=false";
-    private static String tableName = "workouts";
+    private static String tableName = "USERS";
     // jdbc Connection
     private static Connection conn = null;
     private static Statement stmt = null;
 
     public static void main(String[] args) {
         createConnection();
-        createTable("workouts");
-        insertData(5, "LaVals", "Berkeley");
-        selectData();
+        createUserTable();
+//        insertData("USERS", "tazzaboy234", "Tom Bandurka", 19, 'M', 15000, 3000, 2000);
+//        selectData();
         shutdown();
     }
     
-    private static void createTable(String tableName) {
+    private static void createUserTable() {
     	try { 
-    		stmt = conn.createStatement();
-    		stmt.execute("CREATE TABLE " + tableName + " column1 datatype, column2 datatype, column3 datatype");
+    		stmt = conn.createStatement();	//this code creates a table with the data originally stored in a text file in v1.
+    		stmt.execute(""/*//TODO CREATE TABLE SYNTAX HERE*/);
     	
     	} catch (SQLException se) {
     		se.printStackTrace();
     	}
     }
-    
-    
     
     private static void createConnection() {
         try {
@@ -44,11 +41,10 @@ public class WriteToDatabase {
         }
     }
     
-    private static void insertData(int id, String restName, String cityName) {
+    private static void insertData(String tableName, String user, String name, int age, char gender, int steps, int calories, int water) {
         try {
             stmt = conn.createStatement();
-            stmt.execute("insert into " + tableName + " values (" +
-                    id + ",'" + restName + "','" + cityName +"')");
+            stmt.execute(""/*//TODO INSERT DATA SYNTAX HERE*/);
             stmt.close();
         }
         catch (SQLException sqlExcept) {
@@ -56,54 +52,20 @@ public class WriteToDatabase {
         }
     }
     
-    private static void selectData()
-    {
-        try
-        {
-            stmt = conn.createStatement();
-            ResultSet results = stmt.executeQuery("select * from " + tableName);
-            ResultSetMetaData rsmd = results.getMetaData();
-            int numberCols = rsmd.getColumnCount();
-            for (int i=1; i<=numberCols; i++)
-            {
-                //print Column Names
-                System.out.print(rsmd.getColumnLabel(i)+"\t\t");  
-            }
-
-            System.out.println("\n-------------------------------------------------");
-
-            while(results.next())
-            {
-                int id = results.getInt(1);
-                String restName = results.getString(2);
-                String cityName = results.getString(3);
-                System.out.println(id + "\t\t" + restName + "\t\t" + cityName);
-            }
-            results.close();
-            stmt.close();
-        }
-        catch (SQLException sqlExcept)
-        {
-            sqlExcept.printStackTrace();
-        }
+    private static void selectData() throws SQLException { 		//TODO reimplement this with a try/catch rather than a throws.
     }
     
-    private static void shutdown()
-    {
-        try
-        {
-            if (stmt != null)
-            {
+    private static void shutdown() {
+        try {
+            if (stmt != null) {
                 stmt.close();
             }
-            if (conn != null)
-            {
+            if (conn != null) {
                 DriverManager.getConnection(dbURL + ";shutdown=true");
                 conn.close();
             }           
         }
-        catch (SQLException sqlExcept)
-        {
+        catch (SQLException sqlExcept) {
             
         }
 
