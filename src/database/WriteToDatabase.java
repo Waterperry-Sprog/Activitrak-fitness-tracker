@@ -48,7 +48,7 @@ public class WriteToDatabase {
         try {
             stmt = conn.createStatement();
             //stmt.execute(""/*//TODO INSERT DATA SYNTAX HERE*/);
-            stmt.executeUpdate("INSERT INTO USERS " + "VALUES (" + user + "," + name +"," + age + "," + gender + "," + steps + "," + calorie + "," + water +")");
+            stmt.executeUpdate("INSERT INTO USERS " + "VALUES (" + user + "," + name +"," + age + "," + gender + "," + steps + "," + calories + "," + water +")");
             stmt.close();
         }
         catch (SQLException sqlExcept) {
@@ -63,7 +63,7 @@ public class WriteToDatabase {
             ResultSet rs = stmt.executeQuery("SELECT Name FROM USERS WHERE userName = 'tazzaboy234'");
 
             while (rs.next()) {
-                String name = rs.getstring("Name");
+                String name = rs.getString("Name");
                 System.out.println(name + "\n");
             }
         }
