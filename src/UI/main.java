@@ -1,9 +1,13 @@
+package UI;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.*;
 
 import static javafx.application.Platform.exit;
+
+import backend.DataHandler;
 
 public class main extends Application {
 
@@ -21,8 +25,9 @@ public class main extends Application {
     }
 
     static void login(String username, String password) {
-        //TODO LOGIN CODE
-        //Switch to Main Menu
+        if(DataHandler.authenticateUserPasswordPair(username, password)) {
+        	switchToMainMenu();
+        }
     }
 
     static void signup(String username, String password, String password_Confirm) {
@@ -104,5 +109,9 @@ public class main extends Application {
     @Override
     public void stop() {
         exit();
+    }
+    
+    public static void showUI() {
+    	launch();
     }
 }

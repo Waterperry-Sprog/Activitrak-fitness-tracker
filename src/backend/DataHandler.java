@@ -1,6 +1,9 @@
 package backend;
 
 import java.util.Vector;
+
+import UI.ui_login_pane;
+
 import java.io.*;
 
 public class DataHandler {
@@ -67,9 +70,24 @@ public class DataHandler {
 		}
 	}
 	
+	public static boolean authenticateUserPasswordPair(String user, String password){
+		database.Database.createConnection();
+		String result = database.Database.getDataFromUsernameTable("PASSWORDHASH",user,"USERNAME");
+		try {
+			if(Operations.hashPassword(password).contentEquals(result)){
+				return true;
+			}
+			else {
+				return false;
+			}
+		}catch(NullPointerException e) {
+			return false;
+		}
+	}
 	
 	//driver method
 	public static void main(String[] args) {
+		/*
 		DataHandler suunto = new DataHandler();
 		String prefix = System.getProperty("user.dir");
 		String filePath = prefix+"\\src\\backend\\"+""+"sample_data_suunto.csv";
@@ -79,6 +97,8 @@ public class DataHandler {
 		//launch graphics window
 		Graphics.display(time, heartRate);
 		System.out.println("");
+		*/
+		
 		Vector<Integer> inputList = new Vector<Integer>();
 		String dataType = "";
 		/*
@@ -90,7 +110,7 @@ public class DataHandler {
 		}*/
 		
 		//generate totally unsorted data
-		
+		/*
 		dataType = "totally unsorted";
 		int lastAddedNumber = 999999999;
 		for(int i = 0; i<10000000;) {
@@ -101,7 +121,7 @@ public class DataHandler {
 				i++;
 			}
 		}
-		
+		*/
 		
 		//generate totally sorted data
 		/*
@@ -122,5 +142,8 @@ public class DataHandler {
 		long endTime = System.nanoTime();
 		System.out.println("Finished sorting data.");
 		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
+		
+	    UI.main.showUI();
+		
 	}
 }

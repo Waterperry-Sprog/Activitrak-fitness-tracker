@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Mar 26 14:41:12 GMT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0169-ba72-aef4-000006fe9958 
+Thu Mar 28 20:37:27 GMT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0169-c605-8f43-000005be7b58 
 on database directory C:\Users\tband\OneDrive\Documents\GitHub\CSED-2\src\database\newDerby with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/tband/OneDrive/Documents/GitHub/CSED-2/src/database/derby.jar
 java.vendor=Oracle Corporation
@@ -11,6 +11,3 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Mar 26 14:41:12 GMT 2019:
-Shutting down instance a816c00e-0169-ba72-aef4-000006fe9958 on database directory C:\Users\tband\OneDrive\Documents\GitHub\CSED-2\src\database\newDerby with class loader sun.misc.Launcher$AppClassLoader@73d16e93 

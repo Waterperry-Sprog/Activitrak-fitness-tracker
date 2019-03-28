@@ -1,3 +1,5 @@
+package UI;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
@@ -87,6 +89,8 @@ public class ui_login_pane extends Pane {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 main.login(txtField.getText(), pwdField.getText());
+                
+                
             }
         });
 

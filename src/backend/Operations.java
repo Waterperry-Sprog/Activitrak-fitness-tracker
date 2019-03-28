@@ -1,6 +1,10 @@
 package backend;
 
 import java.util.Vector;
+
+import javax.xml.bind.DatatypeConverter;
+
+import java.security.MessageDigest;
 import java.util.Collections;
 
 public class Operations {
@@ -36,6 +40,31 @@ public class Operations {
 		listToSort = inputList;
 		quickSort(0, listToSort.size() - 1);
 		return listToSort;
+	}
+	
+	public static String hashPassword(String password){
+		return sha256(password).toLowerCase();
+	}
+	
+	private static String sha256(String password) {
+		String result = "";
+		byte[] hash = null;
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			hash = digest.digest(password.getBytes("UTF-8"));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return convertByteToHex(hash); // make it printable
+	}
+	
+	private static String convertByteToHex(byte[] data) {
+		return DatatypeConverter.printHexBinary(data);
+    }
+
+	public static boolean authenticateUser(String username, String password) {
+		//search users table for user/password hash
+		return false;
 	}
 	
 	private static void quickSort(int lowerIndex, int higherIndex) {
