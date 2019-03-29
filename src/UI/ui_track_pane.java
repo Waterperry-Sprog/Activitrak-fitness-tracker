@@ -1,10 +1,10 @@
 package UI;
 
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.*;
 import java.lang.*;
 import javafx.scene.layout.*;
@@ -58,7 +58,14 @@ public class ui_track_pane extends Pane {
         img.setLayoutX(11.0);
         img.setLayoutY(11.0);
         img.setPickOnBounds(true);
-        img.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
+        img.setImage(new Image(getClass().getResource("UI/BackArrow.png").toExternalForm()));
+
+        img.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                main.switchToMainMenu();
+            }
+        });
 
         lbl_Track.setLayoutX(203.0);
         lbl_Track.setLayoutY(17.0);

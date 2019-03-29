@@ -1,11 +1,13 @@
 package UI;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
-import java.lang.*;
 import javafx.scene.layout.*;
 
 public class ui_results_pane extends Pane {
@@ -31,7 +33,14 @@ public class ui_results_pane extends Pane {
         img.setLayoutX(11.0);
         img.setLayoutY(11.0);
         img.setPickOnBounds(true);
-        img.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
+        img.setImage(new Image(getClass().getResource("UI/BackArrow.png").toExternalForm()));
+
+        img.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                main.switchToMainMenu();
+            }
+        });
 
         lbl.setLayoutX(189.0);
         lbl.setLayoutY(17.0);
@@ -53,6 +62,7 @@ public class ui_results_pane extends Pane {
         pieChart.setLayoutX(173);
         pieChart.setLayoutY(121);
         pieChart.setMaxSize(255,255);
+
         //TODO ADD GRAPHING FOR VIEWING GOAL RESULTS
         getChildren().add(img);
         getChildren().add(lbl);

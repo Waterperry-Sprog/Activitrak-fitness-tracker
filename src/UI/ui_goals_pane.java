@@ -1,13 +1,12 @@
 package UI;
 
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
-import javafx.scene.effect.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.*;
 import javafx.scene.control.*;
 import java.lang.*;
@@ -91,7 +90,7 @@ public class ui_goals_pane extends Pane {
         img_Logo.setLayoutY(14.0);
         img_Logo.setPickOnBounds(true);
         img_Logo.setPreserveRatio(true);
-        img_Logo.setImage(new Image(getClass().getResource("Logo.png").toExternalForm()));
+        img_Logo.setImage(new Image(getClass().getResource("UI/Logo.png").toExternalForm()));
 
         img_BackArrow.setFitHeight(45.0);
         img_BackArrow.setFitWidth(45.0);
@@ -99,6 +98,13 @@ public class ui_goals_pane extends Pane {
         img_BackArrow.setLayoutY(11.0);
         img_BackArrow.setPickOnBounds(true);
         img_BackArrow.setImage(new Image(getClass().getResource(".BackArrow.png").toExternalForm()));
+
+        img_BackArrow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                main.switchToMainMenu();
+            }
+        });
 
         choice_Daily.setLayoutX(38.0);
         choice_Daily.setLayoutY(176.0);

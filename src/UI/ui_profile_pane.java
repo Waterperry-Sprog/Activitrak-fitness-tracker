@@ -1,6 +1,5 @@
 package UI;
 
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -60,7 +59,14 @@ public class ui_profile_pane extends Pane {
         img_BackArrow.setLayoutX(1.0);
         img_BackArrow.setLayoutY(1.0);
         img_BackArrow.setPickOnBounds(true);
-        img_BackArrow.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
+        img_BackArrow.setImage(new Image(getClass().getResource("UI/BackArrow.png").toExternalForm()));
+
+        img_BackArrow.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                main.switchToMainMenu();
+            }
+        });
 
         img_ProfilePicture.setFitHeight(100.0);
         img_ProfilePicture.setFitWidth(100.0);
