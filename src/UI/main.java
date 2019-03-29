@@ -1,13 +1,12 @@
 package UI;
 
+import backend.DataHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.scene.image.*;
-
 import static javafx.application.Platform.exit;
-
-import backend.DataHandler;
 
 public class main extends Application {
 
@@ -22,36 +21,35 @@ public class main extends Application {
         stage.setScene(scene);
         stage.setTitle("Activitrak - Login");
         stage.show();
+        switchToResults();
     }
 
     static void login(String username, String password) {
-    	if(username.contains("'")||password.contains("'")) {
-			System.out.println("SQL injection detected. Try harder next time.");
-			return;
-		}
-		
+        if(username.contains("'")||password.contains("'")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("SQL Injection detected.");
+            alert.setHeaderText(null);
+            alert.setContentText("Nice try.");
+
+            alert.showAndWait();
+            return;
+        }
+
         if(DataHandler.authenticateUserPasswordPair(username, password)) {
-        	switchToMainMenu();
+            switchToMainMenu();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid Username/Password");
+            alert.setHeaderText(null);
+            alert.setContentText("The Username/Password combination you have entered is incorrect, please try again.");
+
+            alert.showAndWait();
         }
     }
 
     static void signup(String username, String password, String password_Confirm) {
-    	try {
-    		if(username.contains("'")||password.contains("'")) {
-    			System.out.println("SQL injection detected. Try harder next time.");
-    			return;
-    		}
-    		
-    		if(password.contentEquals(password_Confirm)) {
-    			DataHandler.addToDB(username,password);
-    		}
-    		else {
-    			System.out.println("Incorrect password confirmation field.");
-    		}
-    	} catch(NullPointerException e) {
-    		e.printStackTrace();
-    		System.out.println("Do not enter a blank password.");
-    	}
+        //TODO SIGNUP CODE
+        //Switch to Login
     }
 
     static void logout() {
@@ -109,7 +107,9 @@ public class main extends Application {
 
     static void switchToResults() {
         ui_results_pane pane_results = new ui_results_pane();
-        stage.setScene(new Scene(pane_results, 600, 400));
+        Scene scene = new Scene(pane_results, 600, 400);
+        scene.getStylesheets().add("UI/ui_results_stylesheet.css");
+        stage.setScene(scene);
         stage.setTitle("Activitrak - Results");
     }
 
@@ -128,9 +128,5 @@ public class main extends Application {
     @Override
     public void stop() {
         exit();
-    }
-    
-    public static void showUI() {
-    	launch();
     }
 }
