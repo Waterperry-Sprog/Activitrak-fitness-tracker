@@ -1,4 +1,4 @@
-
+package UI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
