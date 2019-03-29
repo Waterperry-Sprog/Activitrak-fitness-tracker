@@ -110,7 +110,7 @@ public class ui_profile_pane extends Pane {
 
         btn_AppConnect.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                main.appConnect();
+                main.switchToAppConnect();
             }
         });
 

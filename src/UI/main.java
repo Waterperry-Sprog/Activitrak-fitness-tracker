@@ -61,10 +61,6 @@ public class main extends Application {
         //TODO IMPLEMENT PASSWORD CHANGE
     }
 
-    static void appConnect() {
-        //TODO APP CONNECTION
-    }
-
     static void addDailyProgress(String calories, String water, String steps, String exerciseDuration) {
         //TODO HANDLE DAILY GOAL PROGRESSION
     }
@@ -79,6 +75,11 @@ public class main extends Application {
 
     static void setWeeklyGoal(String type, String data) {
         //TODO SET GOALS
+    }
+
+    static void appConnectInput(String app, String data) {
+        //TODO HANDLE CSV TEXT
+        //app will be either 'apple', 'garmin', 'suunto'
     }
 
     static void switchToGoals() {
@@ -123,6 +124,12 @@ public class main extends Application {
         ui_login_pane pane_login = new ui_login_pane();
         stage.setScene(new Scene(pane_login, 600, 400));
         stage.setTitle("Activitrak - Login");
+    }
+
+    static void switchToAppConnect() {
+        ui_appconnect_pane pane_appconnect = new ui_appconnect_pane();
+        stage.setScene(new Scene(pane_appconnect, 600, 400));
+        stage.setTitle("Activitrak - App Connect");
     }
 
     @Override
