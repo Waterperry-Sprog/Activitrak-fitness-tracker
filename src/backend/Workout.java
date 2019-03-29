@@ -58,7 +58,12 @@ public class Workout {
 	}
 
 	
-	public Workout() {
-		
+	public Workout( String username, int duration, int calories, int steps, int water, int averageHR) {
+		this.averageHR = averageHR;
+		this.calories = calories;
+		this.duration = duration;
+		this.steps = steps;
+		this.water = water;
+		this.averageHR = averageHR;
 	}
 }

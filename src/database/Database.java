@@ -23,17 +23,19 @@ public class Database {
         }
     }
     
-    public static backend.Workout getDataFromWorkoutLog(String columnName, String searchQuery, String returnQuery) {
+    /*
+    public static backend.Workout getWorkoutObject(String searchQuery, String returnQuery) {
     	try {
-    		Workout w = new Workout();
     		ResultSet rs = null;
 			stmt = conn.createStatement();
-	    	rs = stmt.executeQuery("SELECT " + returnQuery + " FROM WORKOUTLOG WHERE " + columnName + " = '" + searchQuery +"'");
-	    	return w;
+	    	rs = stmt.executeQuery("SELECT * FROM WORKOUTLOG WHERE USERNAME = '" + searchQuery +"'");
+	    	System.out.println(rs.getArray(0) + rs.getArray(1 + rs.getArray(2) + rs.getArray(3) + rs.getArray(4) + rs.getArray(5)));
+	    	//backend.Workout w = new backend.Workout();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    }
+    	return void;
+    }*/
     
     public static void addToLoginTable(String username, String passwordHash) {
     	try {
@@ -46,9 +48,8 @@ public class Database {
     
     public static String getDataFromUsernameTable(String columnName, String searchQuery, String searchColumn) {
     	try {
-    		Statement stt;
-    		stt = conn.createStatement();
-	    	ResultSet rs = stt.executeQuery("SELECT " + columnName + " FROM USERLOGININFO WHERE " + searchColumn + " = '" + searchQuery +"'");
+    		stmt = conn.createStatement();
+	    	ResultSet rs = stmt.executeQuery("SELECT " + columnName + " FROM USERLOGININFO WHERE " + searchColumn + " = '" + searchQuery +"'");
 	    	if (rs.next()) {
 	    		String returnString = rs.getString(1);
 	    	    return returnString;
@@ -57,6 +58,30 @@ public class Database {
 			e.printStackTrace();
 		}
     	return null;
+    }
+    
+    public static int[] getGoalsForUser(String username){
+    	try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM USERGOALS WHERE USERNAME = '"+username+"'");
+			int[] returnMe;
+			if(rs.next()) {
+				returnMe = new int[] {rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),rs.getInt(6)};
+				return returnMe;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    public static void updateUserGoals(String username, int[] goals) {
+    	try {
+    	stmt = conn.createStatement();
+    	stmt.executeUpdate("DELETE FROM USERGOALS WHERE USERNAME = '"+username+"'");
+    	stmt.executeUpdate("INSERT INTO USERGOALS VALUES ('"+username+"', "+goals[0]+", "+goals[1]+", "+goals[2]+", "+goals[3]+", "+goals[4]+")");
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
     }
     
     private static void shutdown() {

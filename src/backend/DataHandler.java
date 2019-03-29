@@ -88,6 +88,14 @@ public class DataHandler {
 		}
 	}
 	
+	public static int[] getUserGoals(String username){
+		try {
+			return database.Database.getGoalsForUser(username);
+		} catch (NullPointerException e) {
+			return null;
+		}
+	}
+	
 	//driver method
 	public static void main(String[] args) {
 		/*
