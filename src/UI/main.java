@@ -82,6 +82,18 @@ public class main extends Application {
         //app will be either 'apple', 'garmin', 'suunto'
     }
 
+    static void addFriend(String username) {
+        //TODO ADD FRIEND CODE
+    }
+
+    static void blockUser(String username) {
+        //TODO BLOCK USER CODE
+    }
+
+    static void unblockUser(String username) {
+        //TODO UNBLOCK USER CODE
+    }
+
     static void switchToGoals() {
         ui_goals_pane pane_goals = new ui_goals_pane();
         stage.setScene(new Scene(pane_goals, 600, 400));
@@ -130,6 +142,12 @@ public class main extends Application {
         ui_appconnect_pane pane_appconnect = new ui_appconnect_pane();
         stage.setScene(new Scene(pane_appconnect, 600, 400));
         stage.setTitle("Activitrak - App Connect");
+    }
+
+    static void switchToFriends() {
+        ui_friends_pane pane_friends = new ui_friends_pane();
+        stage.setScene(new Scene(pane_friends, 600, 400));
+        stage.setTitle("Activitrak - Friends");
     }
 
     @Override

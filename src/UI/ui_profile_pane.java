@@ -21,6 +21,7 @@ public class ui_profile_pane extends Pane {
     private final Button btn_ChangePassword;
     private final Button btn_AppConnect;
     private final Label lbl_Profile;
+    private final Button btn_Friends;
 
     public ui_profile_pane() {
 
@@ -34,6 +35,7 @@ public class ui_profile_pane extends Pane {
         btn_ChangePassword = new Button();
         btn_AppConnect = new Button();
         lbl_Profile = new Label();
+        btn_Friends = new Button();
 
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
@@ -103,6 +105,17 @@ public class ui_profile_pane extends Pane {
             }
         });
 
+        btn_Friends.setLayoutX(31.0);
+        btn_Friends.setLayoutY(290.0);
+        btn_Friends.setMnemonicParsing(false);
+        btn_Friends.setText("Friends");
+
+        btn_Friends.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                main.switchToFriends();
+            }
+        });
+
         btn_AppConnect.setLayoutX(225.0);
         btn_AppConnect.setLayoutY(334.0);
         btn_AppConnect.setMnemonicParsing(false);
@@ -130,6 +143,7 @@ public class ui_profile_pane extends Pane {
         getChildren().add(btn_ChangePassword);
         getChildren().add(btn_AppConnect);
         getChildren().add(lbl_Profile);
+        getChildren().add(btn_Friends);
 
     }
 }
