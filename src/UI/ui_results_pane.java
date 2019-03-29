@@ -1,6 +1,7 @@
-package UI;
 
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.scene.image.*;
@@ -38,9 +39,24 @@ public class ui_results_pane extends Pane {
         lbl.setTextFill(javafx.scene.paint.Color.valueOf("#273c98"));
         lbl.setFont(new Font(64.0));
 
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Current Water", 50),
+                new PieChart.Data("Remaining Water", 20)
+        );
+        PieChart pieChart = new PieChart(pieChartData);
+        pieChart.setTitle("Water Intake (ml)");
+        pieChart.setClockwise(true);
+        pieChart.setStartAngle(0);
+        pieChart.setLabelLineLength(50);
+        pieChart.setLabelsVisible(true);
+        pieChart.setStartAngle(180);
+        pieChart.setLayoutX(173);
+        pieChart.setLayoutY(121);
+        pieChart.setMaxSize(255,255);
         //TODO ADD GRAPHING FOR VIEWING GOAL RESULTS
         getChildren().add(img);
         getChildren().add(lbl);
+        getChildren().add(pieChart);
 
     }
 }
