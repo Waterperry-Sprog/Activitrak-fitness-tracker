@@ -25,14 +25,33 @@ public class main extends Application {
     }
 
     static void login(String username, String password) {
+    	if(username.contains("'")||password.contains("'")) {
+			System.out.println("SQL injection detected. Try harder next time.");
+			return;
+		}
+		
         if(DataHandler.authenticateUserPasswordPair(username, password)) {
         	switchToMainMenu();
         }
     }
 
     static void signup(String username, String password, String password_Confirm) {
-        //TODO SIGNUP CODE
-        //Switch to Login
+    	try {
+    		if(username.contains("'")||password.contains("'")) {
+    			System.out.println("SQL injection detected. Try harder next time.");
+    			return;
+    		}
+    		
+    		if(password.contentEquals(password_Confirm)) {
+    			DataHandler.addToDB(username,password);
+    		}
+    		else {
+    			System.out.println("Incorrect password confirmation field.");
+    		}
+    	} catch(NullPointerException e) {
+    		e.printStackTrace();
+    		System.out.println("Do not enter a blank password.");
+    	}
     }
 
     static void logout() {

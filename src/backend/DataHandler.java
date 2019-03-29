@@ -14,6 +14,10 @@ public class DataHandler {
 	public DataHandler() {
 	}
 	
+	public static void addToDB(String username, String password) {
+		database.Database.addToLoginTable(username,Operations.hashPassword(password));
+	}
+	
 	private void printTables() {
 		for (int i = 0; i < time.size(); i++) {
 			System.out.println("Time:\t" + time.get(i).toString() +"\tHR:\t"+ heartRate.get(i).toString());
@@ -71,7 +75,6 @@ public class DataHandler {
 	}
 	
 	public static boolean authenticateUserPasswordPair(String user, String password){
-		database.Database.createConnection();
 		String result = database.Database.getDataFromUsernameTable("PASSWORDHASH",user,"USERNAME");
 		try {
 			if(Operations.hashPassword(password).contentEquals(result)){
@@ -143,6 +146,7 @@ public class DataHandler {
 		System.out.println("Finished sorting data.");
 		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
 		
+		database.Database.createConnection();
 	    UI.main.showUI();
 		
 	}
