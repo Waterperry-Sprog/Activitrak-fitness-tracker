@@ -29,7 +29,7 @@ public class main extends Application {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("SQL Injection detected.");
             alert.setHeaderText(null);
-            alert.setContentText("Nice try.");
+            alert.setContentText("Nice try.");		//i like this ^_^ -TB
 
             alert.showAndWait();
             return;
@@ -48,8 +48,32 @@ public class main extends Application {
     }
 
     static void signup(String username, String password, String password_Confirm) {
-        //TODO SIGNUP CODE
-        //Switch to Login
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        
+    	try {
+    		if(username.contains("'")||password.contains("'")) {
+    			alert.setTitle("SQL Injection Detected.");
+    	        alert.setHeaderText(null);
+    	        alert.setContentText("Nice try.");
+    	        alert.showAndWait();
+    			return;
+    		}
+    		
+    		if(password.contentEquals(password_Confirm)) {
+    			DataHandler.addToDB(username,password);
+    		}
+    		else {
+    			alert.setTitle("Passwords do not match.");
+    	        alert.setHeaderText(null);
+    	        alert.setContentText("Please check the entered passwords and try again.");
+    	        alert.showAndWait();
+    		}
+    	} catch(NullPointerException e) {
+    		alert.setTitle("Password field is blank.");
+	        alert.setHeaderText(null);
+	        alert.setContentText("Please enter a password.");
+	        alert.showAndWait();
+    	}
     }
 
     static void logout() {
@@ -153,5 +177,9 @@ public class main extends Application {
     @Override
     public void stop() {
         exit();
+    }
+    
+    public static void showUI() {
+    	launch();
     }
 }
