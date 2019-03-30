@@ -105,4 +105,17 @@ public class Operations {
 		
 		return;
 	}
+
+	public static boolean validateAsField(String fieldType, String fieldValue) {
+		boolean returnValue = true;
+		if(fieldType.contentEquals("number")) {
+			char[] parse = fieldValue.toCharArray();
+			for (char c : parse) {
+				if( c < 48 || c > 57 ) {
+					returnValue = false;
+				}
+			}
+		}
+		return returnValue;
+	}
 }

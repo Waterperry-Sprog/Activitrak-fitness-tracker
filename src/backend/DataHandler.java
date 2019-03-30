@@ -152,6 +152,7 @@ public class DataHandler {
 		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
 		
 		database.Database.createConnection();
+		System.out.println(Operations.validateAsField("number", "1234567890"));
 	    UI.main.showUI();
 		
 	}
