@@ -86,7 +86,7 @@ public class ui_friends_pane extends Pane {
         img.setLayoutX(21.0);
         img.setLayoutY(21.0);
         img.setPickOnBounds(true);
-        img.setImage(new Image(getClass().getResource("UI/BackArrow.png").toExternalForm()));
+        img.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
 
         img.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

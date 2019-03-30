@@ -58,7 +58,7 @@ public class ui_track_pane extends Pane {
         img.setLayoutX(11.0);
         img.setLayoutY(11.0);
         img.setPickOnBounds(true);
-        img.setImage(new Image(getClass().getResource("UI/BackArrow.png").toExternalForm()));
+        img.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
 
         img.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

@@ -1,11 +1,9 @@
 package UI;
 
-
 import javafx.event.EventHandler;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.*;
-import javafx.scene.paint.*;
 import javafx.scene.shape.*;
 import javafx.scene.control.*;
 import java.lang.*;

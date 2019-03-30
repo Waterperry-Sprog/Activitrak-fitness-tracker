@@ -90,14 +90,14 @@ public class ui_goals_pane extends Pane {
         img_Logo.setLayoutY(14.0);
         img_Logo.setPickOnBounds(true);
         img_Logo.setPreserveRatio(true);
-        img_Logo.setImage(new Image(getClass().getResource("UI/Logo.png").toExternalForm()));
+        img_Logo.setImage(new Image(getClass().getResource("Logo.png").toExternalForm()));
 
         img_BackArrow.setFitHeight(45.0);
         img_BackArrow.setFitWidth(45.0);
         img_BackArrow.setLayoutX(11.0);
         img_BackArrow.setLayoutY(11.0);
         img_BackArrow.setPickOnBounds(true);
-        img_BackArrow.setImage(new Image(getClass().getResource(".BackArrow.png").toExternalForm()));
+        img_BackArrow.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
 
         img_BackArrow.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

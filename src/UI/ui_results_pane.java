@@ -33,7 +33,7 @@ public class ui_results_pane extends Pane {
         img.setLayoutX(11.0);
         img.setLayoutY(11.0);
         img.setPickOnBounds(true);
-        img.setImage(new Image(getClass().getResource("UI/BackArrow.png").toExternalForm()));
+        img.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
 
         img.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -52,6 +52,7 @@ public class ui_results_pane extends Pane {
                 new PieChart.Data("Current Water", 50),
                 new PieChart.Data("Remaining Water", 20)
         );
+        
         PieChart pieChart = new PieChart(pieChartData);
         pieChart.setTitle("Water Intake (ml)");
         pieChart.setClockwise(true);
