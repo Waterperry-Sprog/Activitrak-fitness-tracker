@@ -18,6 +18,10 @@ public class DataHandler {
 		database.Database.addToLoginTable(username,Operations.hashPassword(password));
 	}
 	
+	public static void logWorkout(String username, int[] metrics) {
+		database.Database.logUserWorkout(username, metrics);
+	}
+	
 	private void printTables() {
 		for (int i = 0; i < time.size(); i++) {
 			System.out.println("Time:\t" + time.get(i).toString() +"\tHR:\t"+ heartRate.get(i).toString());

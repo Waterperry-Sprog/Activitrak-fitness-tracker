@@ -84,6 +84,16 @@ public class Database {
     	}
     }
     
+    public static void logUserWorkout(String username, int[] metrics) {
+    	try {
+    		stmt = conn.createStatement();
+    		System.out.println("INSERT INTO WORKOUTLOGS VALUES ('"+username+", "+metrics[0]+", "+metrics[1]+", "+metrics[2]+", "+metrics[3]+")");
+    		stmt.executeUpdate("INSERT INTO WORKOUTLOGS VALUES ('"+username+"', "+metrics[0]+", "+metrics[1]+", "+metrics[2]+", "+metrics[3]+")");
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
     private static void shutdown() {
         try {
             if (stmt != null) {

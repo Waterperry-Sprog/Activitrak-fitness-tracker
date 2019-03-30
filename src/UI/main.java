@@ -12,8 +12,13 @@ public class main extends Application {
 
     private static Stage stage;
     static Image profilePicture;
+    private static String userID;
 
-    @Override
+    public static String getUserID() {
+		return userID;
+	}
+
+	@Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
         ui_login_pane pane_login = new ui_login_pane();
@@ -36,6 +41,7 @@ public class main extends Application {
         }
 
         if(DataHandler.authenticateUserPasswordPair(username, password)) {
+        	userID = username;
             switchToMainMenu();
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

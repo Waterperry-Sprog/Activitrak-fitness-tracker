@@ -7,6 +7,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.*;
 import java.lang.*;
+
+import backend.Operations;
 import javafx.scene.layout.*;
 
 public class ui_track_pane extends Pane {
@@ -125,7 +127,17 @@ public class ui_track_pane extends Pane {
                 }
                 if(!txtField_Calories.getText().isEmpty() || !txtField_Water.getText().isEmpty() || !txtField_Steps.getText().isEmpty() || !txtField_ExerciseDuration.getText().isEmpty()) {
                     main.addDailyProgress(txtField_Calories.getText(), txtField_Water.getText(), txtField_Steps.getText(), txtField_ExerciseDuration.getText());
+                    String[] entries = {txtField_Steps.getText(), txtField_Calories.getText(), txtField_Water.getText(), txtField_ExerciseDuration.getText()}; //REORDERED TO ALIGN WITH DB
+                    int[] dataToBeLogged = {0,0,0,0};
+                    for (int i = 0; i< entries.length; i++) {
+                    	if(!entries[i].isEmpty()) {
+                    		dataToBeLogged[i] = Operations.toInt(entries[i]);
+                    	}
+                    }
+                    System.out.println(main.getUserID() +" "+ dataToBeLogged[0]+","+dataToBeLogged[1]+","+dataToBeLogged[2]+","+dataToBeLogged[3]);
+                    backend.DataHandler.logWorkout(main.getUserID(), dataToBeLogged);
                 }
+                
             }
         });
 
