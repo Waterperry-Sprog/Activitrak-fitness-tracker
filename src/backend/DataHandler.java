@@ -30,12 +30,7 @@ public class DataHandler {
 	 */
 	public void importDataFromFile(String fileName) {
 		
-		System.out.println("[DEBUG] importing file "+fileName);
 		File data = new File(fileName);
-		
-		System.out.println("[DEBUG] File exists > "+data.exists());
-		System.out.println("[DEBUG] File readable > "+data.canRead());
-		
 		BufferedReader reader;
 		String line = "";
 		try {
@@ -66,9 +61,7 @@ public class DataHandler {
 					heartRate.add( (Integer) hr );
 					time.add( (Integer) timeDataPair++ );
 				}
-			}
-			
-				
+			}		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
