@@ -21,7 +21,7 @@ public class main extends Application {
         stage.setScene(scene);
         stage.setTitle("Activitrak - Login");
         stage.show();
-        switchToResults();
+        //switchToResults(); //[DEBUG]
     }
 
     static void login(String username, String password) {
