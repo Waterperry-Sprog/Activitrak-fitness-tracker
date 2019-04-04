@@ -24,21 +24,13 @@ public class Database {
             System.exit(1);
         }
     }
-    
-    /*
-    public static backend.Workout getWorkoutObject(String searchQuery, String returnQuery) {
-    	try {
-    		ResultSet rs = null;
-			stmt = conn.createStatement();
-	    	rs = stmt.executeQuery("SELECT * FROM WORKOUTLOG WHERE USERNAME = '" + searchQuery +"'");
-	    	System.out.println(rs.getArray(0) + rs.getArray(1 + rs.getArray(2) + rs.getArray(3) + rs.getArray(4) + rs.getArray(5)));
-	    	//backend.Workout w = new backend.Workout();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-    	return void;
-    }*/
-    
+
+    /**
+     * @author tb791
+     * This method adds a username/password hash pair to the logins database.
+     * @param username the username of the new entry
+     * @param passwordHash the hashed password of the user (not salted).
+     */
     public static void addToLoginTable(String username, String passwordHash) {
     	try {
 			stmt = conn.createStatement();
@@ -48,6 +40,14 @@ public class Database {
 		}
     }
     
+    /**
+     * @author tb791
+     * This method finds a user's information from the login table
+     * @param columnName could be password hash, PUK, etc.
+     * @param searchQuery the value by which to identify a user.
+     * @param searchColumn the column to be searched (normally user).
+     * @return the string from the target column specified by columnName.
+     */
     public static String getDataFromUsernameTable(String columnName, String searchQuery, String searchColumn) {
     	try {
     		stmt = conn.createStatement();
@@ -62,6 +62,12 @@ public class Database {
     	return null;
     }
     
+    /**
+     * @author tb791
+     * This method gets all user goals and returns them as an int array.
+     * @param username the user whose goals are to be retrieved.
+     * @return an int[] of all the user's goals.
+     */
     public static int[] getGoalsForUser(String username){
     	try {
 			stmt = conn.createStatement();
@@ -77,6 +83,12 @@ public class Database {
     	return null;
     }
     
+    /**
+     * @author tb791
+     * This method takes a username and an int array of workout metrics, and logs them in the workout table.
+     * @param username the user whose workout is being logged.
+     * @param metrics an int[] of metrics in the order: steps, calories, water, duration, weight.
+     */
     public static void logUserWorkout(String username, int[] metrics) {
     	try {
     		stmt = conn.createStatement();
@@ -86,6 +98,13 @@ public class Database {
     	}
     }
     
+    /**
+     * @author tb791
+     * @param columnName the column in which the entries to be summed exist.
+     * @param tableName the table which contains the column being summed.
+     * @param username the user whose column sum is needed.
+     * @return an int sum of all the entries in the table:column belonging to the user
+     */
     public static int sumColumn(String columnName, String tableName, String username) {
     	try {
 			stmt = conn.createStatement();
@@ -100,6 +119,13 @@ public class Database {
     	return -1;
     }
     
+    /**
+     * @author tb791
+     * Removes an old user goal if exists, and adds the new one.
+     * @param username the user who is adding a goal.
+     * @param goalIndex the index of the goal to be added (see backend method setUserGoal for how this is calculated).
+     * @param goalValue the value of the goal being set.
+     */
     public static void addGoal(String username, int goalIndex, int goalValue) {
     	int[] insertArray = {0,0,0,0,0};
     	insertArray[goalIndex] = goalValue;
@@ -112,6 +138,10 @@ public class Database {
 		}
     }
     
+    /**
+     * @author awpk21
+     * This method closes the connection to the database (only used on a clean exit from the application).
+     */
     private static void shutdown() {
         try {
             if (stmt != null) {
