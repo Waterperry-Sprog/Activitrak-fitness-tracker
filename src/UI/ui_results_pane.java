@@ -48,9 +48,12 @@ public class ui_results_pane extends Pane {
         lbl.setTextFill(javafx.scene.paint.Color.valueOf("#273c98"));
         lbl.setFont(new Font(64.0));
 
+        int goal = backend.DataHandler.getGoalForUser("water", main.getUserID());
+        int current = backend.DataHandler.getProgressForUser("water", main.getUserID());
+        System.out.println("Goal water: "+goal+"\tCurrent water: "+current);
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Current Water", 50),
-                new PieChart.Data("Remaining Water", 20)
+                new PieChart.Data("Current Water", current),
+                new PieChart.Data("Remaining Water", ( (goal - current)<=0) ? (0) : (goal-current) )
         );
         
         PieChart pieChart = new PieChart(pieChartData);

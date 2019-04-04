@@ -14,7 +14,7 @@ public class main extends Application {
     static Image profilePicture;
     private static String userID;
 
-    public static String getUserID() {
+    protected static String getUserID() {
 		return userID;
 	}
 

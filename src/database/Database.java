@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.sql.ResultSetMetaData;
 
 public class Database {
@@ -87,11 +88,35 @@ public class Database {
     public static void logUserWorkout(String username, int[] metrics) {
     	try {
     		stmt = conn.createStatement();
-    		System.out.println("INSERT INTO WORKOUTLOGS VALUES ('"+username+", "+metrics[0]+", "+metrics[1]+", "+metrics[2]+", "+metrics[3]+")");
     		stmt.executeUpdate("INSERT INTO WORKOUTLOGS VALUES ('"+username+"', "+metrics[0]+", "+metrics[1]+", "+metrics[2]+", "+metrics[3]+")");
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
+    }
+    
+    public static ResultSet getAll(String tableName, String username) {
+    	try {
+    		stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("SELECT * FROM "+tableName+" WHERE USERNAME = '"+username+"'");
+    		return rs;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    }
+    
+    public static int sumColumn(String columnName, String tableName, String username) {
+    	try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT SUM("+columnName+") FROM "+tableName+" WHERE USERNAME = '"+username+"'");
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return -1;
     }
     
     private static void shutdown() {

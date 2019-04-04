@@ -2,9 +2,13 @@ package backend;
 
 import java.util.Vector;
 
+import UI.main;
 import UI.ui_login_pane;
 
 import java.io.*;
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DataHandler {
 	
@@ -20,12 +24,6 @@ public class DataHandler {
 	
 	public static void logWorkout(String username, int[] metrics) {
 		database.Database.logUserWorkout(username, metrics);
-	}
-	
-	private void printTables() {
-		for (int i = 0; i < time.size(); i++) {
-			System.out.println("Time:\t" + time.get(i).toString() +"\tHR:\t"+ heartRate.get(i).toString());
-		}
 	}
 	
 	/**
@@ -93,6 +91,35 @@ public class DataHandler {
 		}
 	}
 	
+	public static int getGoalForUser(String goalName, String username) {
+		try {
+			int array[] = getUserGoals(username);
+			switch (goalName) {
+				case "steps": return array[0];
+				case "calories": return array[1];
+				case "water": return array[2];
+				case "duration": return array[3];
+				case "weight" : return array[4];
+			}
+		} catch (NullPointerException n) {
+			//this might be thrown if the username does not exist in the database.
+			System.out.println("User does not exist.");
+		}
+		return -1;
+	}
+	
+	public static int getProgressForUser(String goalName, String username) {
+		try {
+			return sumColumn(goalName, "WORKOUTLOGS", username);
+		} catch (NullPointerException e) {
+			return -1;
+		}
+	}
+	
+	private static int sumColumn(String columnName, String tableName, String username) {
+		return database.Database.sumColumn(columnName, tableName, username);
+	}
+	
 	//driver method
 	public static void main(String[] args) {
 		/*
@@ -152,7 +179,6 @@ public class DataHandler {
 		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
 		
 		database.Database.createConnection();
-		System.out.println(Operations.validateAsField("number", "1234567890"));
 	    UI.main.showUI();
 		
 	}
