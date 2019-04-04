@@ -91,22 +91,6 @@ public class main extends Application {
         //TODO IMPLEMENT PASSWORD CHANGE
     }
 
-    static void addDailyProgress(String calories, String water, String steps, String exerciseDuration) {
-        //TODO HANDLE DAILY GOAL PROGRESSION
-    }
-
-    static void addWeeklyProgress(String weight) {
-        //TODO HANDLE WEEKLY GOAL PROGRESSION
-    }
-
-    static void setDailyGoal(String type, String data) {
-        //TODO SET GOALS
-    }
-
-    static void setWeeklyGoal(String type, String data) {
-        //TODO SET GOALS
-    }
-
     static void appConnectInput(String app, String data) {
         //TODO HANDLE CSV TEXT
         //app will be either 'apple', 'garmin', 'suunto'
