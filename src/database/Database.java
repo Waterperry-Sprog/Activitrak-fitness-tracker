@@ -76,15 +76,6 @@ public class Database {
 		}
     	return null;
     }
-    public static void updateUserGoals(String username, int[] goals) {
-    	try {
-    	stmt = conn.createStatement();
-    	stmt.executeUpdate("DELETE FROM USERGOALS WHERE USERNAME = '"+username+"'");
-    	stmt.executeUpdate("INSERT INTO USERGOALS VALUES ('"+username+"', "+goals[0]+", "+goals[1]+", "+goals[2]+", "+goals[3]+", "+goals[4]+")");
-    	} catch (SQLException e) {
-    		e.printStackTrace();
-    	}
-    }
     
     public static void logUserWorkout(String username, int[] metrics) {
     	try {
@@ -92,17 +83,6 @@ public class Database {
     		stmt.executeUpdate("INSERT INTO WORKOUTLOGS VALUES ('"+username+"', "+metrics[0]+", "+metrics[1]+", "+metrics[2]+", "+metrics[3]+")");
     	} catch (SQLException e) {
     		e.printStackTrace();
-    	}
-    }
-    
-    public static ResultSet getAll(String tableName, String username) {
-    	try {
-    		stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("SELECT * FROM "+tableName+" WHERE USERNAME = '"+username+"'");
-    		return rs;
-    	} catch (SQLException e) {
-    		e.printStackTrace();
-    		return null;
     	}
     }
     
@@ -118,6 +98,18 @@ public class Database {
 			e.printStackTrace();
 		}
     	return -1;
+    }
+    
+    public static void addGoal(String username, int goalIndex, int goalValue) {
+    	int[] insertArray = {0,0,0,0,0};
+    	insertArray[goalIndex] = goalValue;
+    	try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate("DELETE FROM USERGOALS WHERE USERNAME = '"+username+"'");
+			stmt.executeUpdate("INSERT INTO USERGOALS VALUES ('"+username+"', "+insertArray[0]+", "+insertArray[1]+", "+insertArray[2]+", "+insertArray[3]+", "+insertArray[4]+")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
     
     private static void shutdown() {

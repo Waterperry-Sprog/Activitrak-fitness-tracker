@@ -137,7 +137,7 @@ public class ui_goals_pane extends Pane {
 
         btn_WeeklyGoal.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                main.setWeeklyGoal(lbl_WeeklyData.getText(), txtField_WeeklyInput.getText());
+                backend.DataHandler.setUserGoal(main.getUserID(), lbl_WeeklyData.getText(), txtField_WeeklyInput.getText());
             }
         });
 
@@ -148,7 +148,7 @@ public class ui_goals_pane extends Pane {
 
         btn_DailyGoal.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                main.setDailyGoal(lbl_DailyData.getText(), txtField_DailyInput.getText());
+                backend.DataHandler.setUserGoal(main.getUserID(), lbl_DailyData.getText(), txtField_DailyInput.getText());
             }
         });
 

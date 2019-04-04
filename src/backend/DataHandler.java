@@ -4,7 +4,6 @@ import java.util.Vector;
 
 import UI.main;
 import UI.ui_login_pane;
-
 import java.io.*;
 import java.sql.Array;
 import java.sql.ResultSet;
@@ -120,7 +119,27 @@ public class DataHandler {
 		return database.Database.sumColumn(columnName, tableName, username);
 	}
 	
+	public static void setUserGoal(String username, String goalName, String goal) {
+		int goalValue = Operations.toInt(goal);
+		int goalIndex = -1;
+    	switch(goalName) {	//goal label from UI is different to simple text, so that is sorted here rather than in the db code.
+    		case "Steps:" : goalIndex = 0;
+    			break;
+    		case "Calories (kCal):" : goalIndex = 1;
+    			break;
+    		case "Water (ml):" : goalIndex = 2;
+    			break;
+    		case "Exercise Duration (Mins):" :  goalIndex = 3;
+    			break;
+    		case "Weight (kg):" :  goalIndex = 4;
+    			break;
+    	}
+		database.Database.addGoal(username, goalIndex, goalValue);
+		
+	}
+	
 	//driver method
+
 	public static void main(String[] args) {
 		/*
 		DataHandler suunto = new DataHandler();
