@@ -19,8 +19,9 @@ public class Database {
             //Get a connection
             conn = DriverManager.getConnection(dbURL); 
         }
-        catch (Exception except) {
-            except.printStackTrace();
+        catch (Exception e) {
+        	System.out.println("ERROR [FATAL]: Application could not run at this time. Exiting...");
+            System.exit(1);
         }
     }
     

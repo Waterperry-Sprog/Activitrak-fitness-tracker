@@ -82,10 +82,10 @@ public class ui_track_pane extends Pane {
         lbl_DailyUpdate.setFont(new Font(24.0));
 
         txtField_Calories.setLayoutX(48.0);
-        txtField_Calories.setLayoutY(187.0);
-
+        txtField_Calories.setLayoutY(238.0);
+        
         txtField_Water.setLayoutX(48.0);
-        txtField_Water.setLayoutY(238.0);
+        txtField_Water.setLayoutY(187.0);
 
         txtField_Steps.setLayoutX(48.0);
         txtField_Steps.setLayoutY(289.0);
@@ -122,11 +122,7 @@ public class ui_track_pane extends Pane {
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                if(!txtField_Weight.getText().isEmpty()) {
-                    main.addWeeklyProgress(txtField_Weight.getText());
-                }
                 if(!txtField_Calories.getText().isEmpty() || !txtField_Water.getText().isEmpty() || !txtField_Steps.getText().isEmpty() || !txtField_ExerciseDuration.getText().isEmpty()) {
-                    main.addDailyProgress(txtField_Calories.getText(), txtField_Water.getText(), txtField_Steps.getText(), txtField_ExerciseDuration.getText());
                     String[] entries = {txtField_Steps.getText(), txtField_Calories.getText(), txtField_Water.getText(), txtField_ExerciseDuration.getText()}; //REORDERED TO ALIGN WITH DB
                     int[] dataToBeLogged = {0,0,0,0};
                     for (int i = 0; i< entries.length; i++) {
