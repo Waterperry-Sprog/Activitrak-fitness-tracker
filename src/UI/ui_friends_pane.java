@@ -11,7 +11,7 @@ import javafx.scene.layout.*;
 
 public class ui_friends_pane extends Pane {
 
-    private final ListView listView;
+    private final TextArea listView;
     private final Label lbl_Friends;
     private final Label lbl_addFriend;
     private final TextField txtField_addFriend;
@@ -25,7 +25,7 @@ public class ui_friends_pane extends Pane {
 
     public ui_friends_pane() {
 
-        listView = new ListView();
+        listView = new TextArea();
         lbl_Friends = new Label();
         lbl_addFriend = new Label();
         txtField_addFriend = new TextField();
@@ -63,7 +63,7 @@ public class ui_friends_pane extends Pane {
 
         lbl_block.setLayoutX(49.0);
         lbl_block.setLayoutY(178.0);
-        lbl_block.setText("Block someone:");
+        lbl_block.setText("Unfriend someone:");
 
         txtField_unblock.setLayoutX(44.0);
         txtField_unblock.setLayoutY(249.0);
@@ -106,10 +106,17 @@ public class ui_friends_pane extends Pane {
                     main.addFriend(txtField_addFriend.getText());
                 }
                 if(!txtField_block.getText().isEmpty()) {
-                    main.blockUser(txtField_block.getText());
+                    main.unfriendUser(txtField_block.getText());
                 }
-                if(!txtField_unblock.getText().isEmpty()) {
-                    main.unblockUser(txtField_unblock.getText());
+//                if(!txtField_unblock.getText().isEmpty()) {
+//                    main.unblockUser(txtField_unblock.getText());
+//                }
+                listView.clear();
+                String[] friendList = backend.DataHandler.getFriendsForUser(main.getUserID());
+                for (String s : friendList) {
+                	if(backend.DataHandler.areFriends(main.getUserID(), s)) {
+                		listView.appendText(s+"\n");
+                	}
                 }
             }
         });
@@ -119,12 +126,21 @@ public class ui_friends_pane extends Pane {
         getChildren().add(lbl_addFriend);
         getChildren().add(txtField_addFriend);
         getChildren().add(lbl_block);
-        getChildren().add(txtField_unblock);
-        getChildren().add(lbl_unblock);
+//        getChildren().add(txtField_unblock);
+//        getChildren().add(lbl_unblock);
         getChildren().add(txtField_block);
+        
         getChildren().add(lbl_title);
         getChildren().add(img);
         getChildren().add(btn);
+        
+        listView.setEditable(false);
+        String[] friendList = backend.DataHandler.getFriendsForUser(main.getUserID());
+        for (String s : friendList) {
+        	if(backend.DataHandler.areFriends(main.getUserID(), s)) {
+        		listView.appendText(s+"\n");
+        	}
+        }
 
     }
 }

@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.Vector;
 import java.sql.ResultSetMetaData;
 
 public class Database {
@@ -25,6 +25,19 @@ public class Database {
         }
     }
 
+    public static void executeCommand(String sql) {
+    	try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				System.out.println("next");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     /**
      * @author tb791
      * This method adds a username/password hash pair to the logins database.
@@ -134,6 +147,72 @@ public class Database {
 			stmt.executeUpdate("DELETE FROM USERGOALS WHERE USERNAME = '"+username+"'");
 			stmt.executeUpdate("INSERT INTO USERGOALS VALUES ('"+username+"', "+insertArray[0]+", "+insertArray[1]+", "+insertArray[2]+", "+insertArray[3]+", "+insertArray[4]+")");
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
+
+    /**
+     * @author tb791
+     * This method retrieves friends' names for a given user.
+     * @param username The username to get friends for
+     * @return a string array of friend names
+     */
+    public static String[] getFriendsForUser(String username){
+    	Vector<String> returnMe = new Vector<String>();
+    	try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT FRIEND FROM FRIENDCONNECTIONS WHERE USERNAME = '"+username+"'");
+			int i = 1;
+			String dummy;
+			while (rs.next()) {
+				dummy = rs.getString(i);
+				returnMe.add(dummy);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	String[] s = {"","","","",""};
+    	int x = 0;
+    	for(String str : returnMe) {
+    		s[x] = str;
+    		x++;
+    	}
+    	return s;
+    }
+    
+    public static boolean doesUserExist(String username) {
+    	try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT USERNAME FROM USERLOGININFO WHERE USERNAME = '"+username+"'");
+			if(rs.next()) {
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+    }
+    
+    public static void addFriendForUser(String username, String friend) {
+    	try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate("INSERT INTO FRIENDCONNECTIONS VALUES ('"+username+"','"+friend+"')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    public static void removeFriendForUser(String username, String friend){
+    	try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate("DELETE FROM FRIENDCONNECTIONS WHERE USERNAME = '"+username+"' AND FRIEND = '"+friend+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

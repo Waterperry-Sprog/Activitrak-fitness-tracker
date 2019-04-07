@@ -40,7 +40,7 @@ public class main extends Application {
             return;
         }
 
-        if(DataHandler.authenticateUserPasswordPair(username, password)) {
+        if(backend.DataHandler.authenticateUserPasswordPair(username, password)) {
         	userID = username;
             switchToMainMenu();
         } else {
@@ -83,8 +83,7 @@ public class main extends Application {
     }
 
     static void logout() {
-        //TODO LOGOUT CODE
-        //Switch to Login
+        switchToLogin();
     }
 
     static void passwordChange() {
@@ -96,16 +95,12 @@ public class main extends Application {
         //app will be either 'apple', 'garmin', 'suunto'
     }
 
-    static void addFriend(String username) {
-        //TODO ADD FRIEND CODE
+    static void addFriend(String friend) {
+        backend.DataHandler.addFriendForUser(userID, friend);
     }
 
-    static void blockUser(String username) {
-        //TODO BLOCK USER CODE
-    }
-
-    static void unblockUser(String username) {
-        //TODO UNBLOCK USER CODE
+    static void unfriendUser(String username) {
+        backend.DataHandler.unfriend(userID,username);
     }
 
     static void switchToGoals() {

@@ -61,31 +61,19 @@ public class Operations {
 	private static String convertByteToHex(byte[] data) {
 		return DatatypeConverter.printHexBinary(data);
     }
-
-	public static boolean authenticateUser(String username, String password) {
-		//search users table for user/password hash
-		return false;
-	}
 	
 	private static void quickSort(int lowerIndex, int higherIndex) {
-		
 		int i = lowerIndex;
 		int j = higherIndex;
-
 		// calculate pivot number, using middle number to reduce sort times for sorted lists
 		int pivot = listToSort.get( lowerIndex + (higherIndex-lowerIndex) / 2);
-
 		// Divide into two arrays
 		while (i <= j) {
-
-			
-			
 			//swap two numbers from each side of pivot.
 			//find next value to be swapped from lower half
 			while ( listToSort.get(i) < pivot ) {
 				i++;
 			}
-			
 			//find next value to be swapped from upper half
 			while ( pivot < listToSort.get(j) ) {
 				j--;
@@ -96,13 +84,11 @@ public class Operations {
 				j--;
 			}
 		}
-		
 		// call quickSort() method recursively to divide array up into smaller arrays.
 		if (lowerIndex < j)
 		quickSort(lowerIndex, j);
 		if (i < higherIndex)
 		quickSort(i, higherIndex);
-		
 		return;
 	}
 

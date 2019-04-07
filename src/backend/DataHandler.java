@@ -27,6 +27,7 @@ public class DataHandler {
 	 * @param password the password as plain text to be logged.
 	 */
 	public static void addToDB(String username, String password) {
+		database.Database.createConnection();
 		database.Database.addToLoginTable(username,Operations.hashPassword(password));
 	}
 	
@@ -37,6 +38,7 @@ public class DataHandler {
 	 * @param metrics an int[] of metrics in the order: steps, calories, water, duration, weight.
 	 */
 	public static void logWorkout(String username, int[] metrics) {
+		database.Database.createConnection();
 		database.Database.logUserWorkout(username, metrics);
 	}
 	
@@ -46,7 +48,6 @@ public class DataHandler {
 	 * @param file the file to parse
 	 */
 	public void importDataFromFile(String fileName) {
-		
 		File data = new File(fileName);
 		BufferedReader reader;
 		String line = "";
@@ -92,6 +93,7 @@ public class DataHandler {
 	 * @return true if the pair exist in the database, false otherwise.
 	 */
 	public static boolean authenticateUserPasswordPair(String user, String password){
+		database.Database.createConnection();
 		String result = database.Database.getDataFromUsernameTable("PASSWORDHASH",user,"USERNAME");
 		try {
 			if(Operations.hashPassword(password).contentEquals(result)){
@@ -112,6 +114,7 @@ public class DataHandler {
 	 * @return an int array by goals in the order steps, calories, water, duration, weight (only one entry should really be non-zero).
 	 */
 	private static int[] getUserGoals(String username){
+		database.Database.createConnection();
 		try {
 			return database.Database.getGoalsForUser(username);
 		} catch (NullPointerException e) {
@@ -127,6 +130,7 @@ public class DataHandler {
 	 * @return the goal value as an int.
 	 */
 	public static int getGoalForUser(String goalName, String username) {
+		database.Database.createConnection();
 		try {
 			int array[] = getUserGoals(username);
 			switch (goalName) {
@@ -151,6 +155,7 @@ public class DataHandler {
 	 * @return the user's current progress as an integer.
 	 */
 	public static int getProgressForUser(String goalName, String username) {
+		database.Database.createConnection();
 		try {
 			return sumColumn(goalName, "WORKOUTLOGS", username);
 		} catch (NullPointerException e) {
@@ -167,6 +172,7 @@ public class DataHandler {
 	 * @return See database.Database.sumColumn for more information.
 	 */
 	private static int sumColumn(String columnName, String tableName, String username) {
+		database.Database.createConnection();
 		return database.Database.sumColumn(columnName, tableName, username);
 	}
 	
@@ -178,6 +184,7 @@ public class DataHandler {
 	 * @param goal See database.Database.addGoal for more information.
 	 */
 	public static void setUserGoal(String username, String goalName, String goal) {
+		database.Database.createConnection();
 		int goalValue = Operations.toInt(goal);
 		int goalIndex = -1;
     	switch(goalName) {	//goal label from UI is different to simple text, so that is sorted here rather than in the db code.
@@ -197,11 +204,63 @@ public class DataHandler {
 	}
 	
 	/**
+	 * This method is for internal use only. See database.Database.getFriendsForUser for more information.
+	 * @param username the username to get friends for.
+	 * @return a string array of the user's friends (max 5).
+	 */
+	public static String[] getFriendsForUser(String username){
+		database.Database.createConnection();
+		return database.Database.getFriendsForUser(username);
+	}
+	
+	public static void addFriendForUser(String username, String friend) {
+		database.Database.createConnection();
+		String[] friends = database.Database.getFriendsForUser(username);
+		for(String s : friends) {
+			if(s.equals(friend)) {
+				return;
+			}
+		}
+		if(database.Database.doesUserExist(friend)) {
+			database.Database.addFriendForUser(username, friend);
+		}
+	}
+	
+	public static void unfriend(String username, String friend) {
+		database.Database.createConnection();
+		database.Database.removeFriendForUser(username, friend);
+	}
+
+	public static boolean areFriends(String user1, String user2){
+		database.Database.createConnection();
+		String[] friends1 = database.Database.getFriendsForUser(user1);
+		String[] friends2 = database.Database.getFriendsForUser(user2);
+		boolean one = false;
+		boolean two = false;
+		for(String s : friends1) {
+			if(s.equalsIgnoreCase(user2)) {
+				one = true;
+				break;
+			}
+		}
+		for(String s : friends2) {
+			if(s.equalsIgnoreCase(user1)) {
+				two = true;
+				break;
+			}
+		}
+		if(one&&two) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * @author tb791
 	 * This method is a driver method to test different features of the code and to eventually run the actual program.
 	 * @param args command line arguments (shouldn't be any).
 	 */
-	public static void main(String[] args) {
+ 	public static void main(String[] args) {
 		/*
 		DataHandler suunto = new DataHandler();
 		String prefix = System.getProperty("user.dir");
@@ -257,8 +316,6 @@ public class DataHandler {
 		long endTime = System.nanoTime();
 		System.out.println("Finished sorting data.");
 		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
-		
-		database.Database.createConnection();
 	    UI.main.showUI();
 		
 	}
