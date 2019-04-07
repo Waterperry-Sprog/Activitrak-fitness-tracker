@@ -18,7 +18,7 @@ public class ui_profile_pane extends Pane {
     private final Label lbl_Data2;
     private final Label lbl_Data3;
     private final Label lbl_Data4;
-    private final Button btn_ChangePassword;
+//    private final Button btn_ChangePassword;
     private final Button btn_AppConnect;
     private final Label lbl_Profile;
     private final Button btn_Friends;
@@ -32,7 +32,7 @@ public class ui_profile_pane extends Pane {
         lbl_Data2 = new Label();
         lbl_Data3 = new Label();
         lbl_Data4 = new Label();
-        btn_ChangePassword = new Button();
+//        btn_ChangePassword = new Button();
         btn_AppConnect = new Button();
         lbl_Profile = new Label();
         btn_Friends = new Button();
@@ -80,11 +80,17 @@ public class ui_profile_pane extends Pane {
 
         lbl_Data1.setLayoutX(142.0);
         lbl_Data1.setLayoutY(150.0);
-        lbl_Data1.setText("Data");
+        lbl_Data1.setText(main.getUserID());
 
         lbl_Data2.setLayoutX(142.0);
         lbl_Data2.setLayoutY(167.0);
-        lbl_Data2.setText("Data");
+        int numberOfFriends = backend.DataHandler.getNumberOfFriends(main.getUserID());
+        if(numberOfFriends==1) {
+        	lbl_Data2.setText(numberOfFriends + " Friend");
+        }
+        if(numberOfFriends!=1) {
+        	lbl_Data2.setText(numberOfFriends + " Friends");
+        }
 
         lbl_Data3.setLayoutX(142.0);
         lbl_Data3.setLayoutY(183.0);
@@ -94,16 +100,16 @@ public class ui_profile_pane extends Pane {
         lbl_Data4.setLayoutY(198.0);
         lbl_Data4.setText("Data");
 
-        btn_ChangePassword.setLayoutX(31.0);
-        btn_ChangePassword.setLayoutY(334.0);
-        btn_ChangePassword.setMnemonicParsing(false);
-        btn_ChangePassword.setText("Change Password");
-
-        btn_ChangePassword.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                main.passwordChange();
-            }
-        });
+//        btn_ChangePassword.setLayoutX(31.0);
+//        btn_ChangePassword.setLayoutY(334.0);
+//        btn_ChangePassword.setMnemonicParsing(false);
+//        btn_ChangePassword.setText("Change Password");
+//
+//        btn_ChangePassword.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override public void handle(ActionEvent e) {
+//                main.passwordChange();
+//            }
+//        });
 
         btn_Friends.setLayoutX(31.0);
         btn_Friends.setLayoutY(290.0);
@@ -140,7 +146,7 @@ public class ui_profile_pane extends Pane {
         getChildren().add(lbl_Data2);
         getChildren().add(lbl_Data3);
         getChildren().add(lbl_Data4);
-        getChildren().add(btn_ChangePassword);
+//        getChildren().add(btn_ChangePassword);
         getChildren().add(btn_AppConnect);
         getChildren().add(lbl_Profile);
         getChildren().add(btn_Friends);

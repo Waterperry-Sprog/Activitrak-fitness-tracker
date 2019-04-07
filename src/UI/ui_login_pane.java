@@ -15,7 +15,7 @@ public class ui_login_pane extends Pane {
     private final PasswordField pwdField;
     private final TextField txtField;
     private final Label lbl_Password;
-    private final Label lbl_ForgotPassword;
+//    private final Label lbl_ForgotPassword;
     private final Label lbl_Login;
     private final Label lbl_Signup;
     private final Button btn;
@@ -27,7 +27,7 @@ public class ui_login_pane extends Pane {
         pwdField = new PasswordField();
         txtField = new TextField();
         lbl_Password = new Label();
-        lbl_ForgotPassword = new Label();
+//        lbl_ForgotPassword = new Label();
         lbl_Login = new Label();
         lbl_Signup = new Label();
         btn = new Button();
@@ -57,10 +57,10 @@ public class ui_login_pane extends Pane {
         lbl_Password.setText("Password:");
         lbl_Password.setFont(new Font(18.0));
 
-        lbl_ForgotPassword.setLayoutX(245.0);
-        lbl_ForgotPassword.setLayoutY(369.0);
-        lbl_ForgotPassword.setText("Forgot Password?");
-        lbl_ForgotPassword.setUnderline(true);
+//        lbl_ForgotPassword.setLayoutX(245.0);
+//        lbl_ForgotPassword.setLayoutY(369.0);
+//        lbl_ForgotPassword.setText("Forgot Password?");
+//        lbl_ForgotPassword.setUnderline(true);
 
         lbl_Login.setLayoutX(217.0);
         lbl_Login.setLayoutY(14.0);
@@ -106,7 +106,7 @@ public class ui_login_pane extends Pane {
         getChildren().add(pwdField);
         getChildren().add(txtField);
         getChildren().add(lbl_Password);
-        getChildren().add(lbl_ForgotPassword);
+//        getChildren().add(lbl_ForgotPassword);
         getChildren().add(lbl_Login);
         getChildren().add(lbl_Signup);
         getChildren().add(btn);

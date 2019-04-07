@@ -233,6 +233,17 @@ public class DataHandler {
 		database.Database.removeFriendForUser(username, friend);
 	}
 
+	public static int getNumberOfFriends(String username) {
+		int returnValue = 0;
+		String[] friends = getFriendsForUser(username);
+		for(String s : friends) {
+			if(doesUserExist(s) && areFriends(s, username)) {
+				returnValue++;
+			}
+		}
+		return returnValue;
+	}
+	
 	public static boolean doesUserExist(String username) {
 		database.Database.createConnection();
 		return database.Database.doesUserExist(username);
