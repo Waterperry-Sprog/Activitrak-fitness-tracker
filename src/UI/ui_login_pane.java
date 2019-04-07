@@ -112,5 +112,7 @@ public class ui_login_pane extends Pane {
         getChildren().add(btn);
         getChildren().add(img);
 
+        txtField.requestFocus();
+        
     }
 }

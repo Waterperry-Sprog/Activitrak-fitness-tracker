@@ -5,12 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.*;
 import java.lang.*;
 import javafx.scene.layout.*;
 
 public class ui_signup_pane extends Pane {
 
+	private final ImageView img;
     private final Label lbl_Signup;
     private final ImageView imageView;
     private final Label lbl_Password;
@@ -23,6 +25,7 @@ public class ui_signup_pane extends Pane {
 
     public ui_signup_pane() {
 
+        img = new ImageView();
         lbl_Signup = new Label();
         imageView = new ImageView();
         lbl_Password = new Label();
@@ -86,10 +89,33 @@ public class ui_signup_pane extends Pane {
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                main.signup(txtField.getText(), pwdField.getText(), pwdField_Confirm.getText());
+            	if(backend.DataHandler.doesUserExist(txtField.getText())) {
+            		Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Sorry, that username is taken.");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please try to create a username unique to you.");
+                    alert.showAndWait();
+            	}
+            	else {
+            		main.signup(txtField.getText(), pwdField.getText(), pwdField_Confirm.getText());
+            	}
+            }
+        });
+        img.setFitHeight(45.0);
+        img.setFitWidth(45.0);
+        img.setLayoutX(11.0);
+        img.setLayoutY(11.0);
+        img.setPickOnBounds(true);
+        img.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
+
+        img.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                main.switchToLogin();
             }
         });
 
+        getChildren().add(img);
         getChildren().add(lbl_Signup);
         getChildren().add(imageView);
         getChildren().add(lbl_Password);

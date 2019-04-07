@@ -22,7 +22,6 @@ public class ui_mainmenu_pane extends Pane {
     private final Label lbl_Results;
     private final Label lbl_Goals;
     private final Label lbl_Profile;
-    private final ImageView img;
     private final Label lbl_Logout;
 
     public ui_mainmenu_pane() {
@@ -38,7 +37,6 @@ public class ui_mainmenu_pane extends Pane {
         lbl_Results = new Label();
         lbl_Goals = new Label();
         lbl_Profile = new Label();
-        img = new ImageView();
         lbl_Logout = new Label();
 
         setMaxHeight(USE_PREF_SIZE);
@@ -49,17 +47,17 @@ public class ui_mainmenu_pane extends Pane {
         setPrefWidth(400.0);
         setStyle("-fx-background-color: #FEAD80;");
 
-        lbl_Data1.setLayoutX(352.0);
+        lbl_Data1.setLayoutX(332.0);
         lbl_Data1.setLayoutY(14.0);
-        lbl_Data1.setText("Label");
+        lbl_Data1.setText(main.getUserID());
 
         lbl_Data2.setLayoutX(352.0);
         lbl_Data2.setLayoutY(31.0);
-        lbl_Data2.setText("Label");
+        lbl_Data2.setText("");
 
         lbl_Data3.setLayoutX(352.0);
         lbl_Data3.setLayoutY(48.0);
-        lbl_Data3.setText("Label");
+        lbl_Data3.setText("");
 
         rect_Track.setArcHeight(5.0);
         rect_Track.setArcWidth(5.0);
@@ -185,12 +183,6 @@ public class ui_mainmenu_pane extends Pane {
             }
         });
 
-        img.setFitHeight(45.0);
-        img.setFitWidth(45.0);
-        img.setLayoutX(1.0);
-        img.setLayoutY(1.0);
-        img.setPickOnBounds(true);
-        img.setImage(new Image(getClass().getResource("BackArrow.png").toExternalForm()));
 
         lbl_Logout.setLayoutX(176.0);
         lbl_Logout.setLayoutY(6.0);
@@ -214,7 +206,6 @@ public class ui_mainmenu_pane extends Pane {
         getChildren().add(lbl_Results);
         getChildren().add(lbl_Goals);
         getChildren().add(lbl_Profile);
-        getChildren().add(img);
         getChildren().add(lbl_Logout);
 
     }

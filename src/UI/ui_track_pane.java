@@ -159,6 +159,8 @@ public class ui_track_pane extends Pane {
         getChildren().add(btn);
         getChildren().add(lbl_Weight);
         getChildren().add(txtField_Weight);
+        
+        txtField_Water.requestFocus();
 
     }
 }
