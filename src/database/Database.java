@@ -171,8 +171,11 @@ public class Database {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	String[] s = {"","","","",""};
+    	String[] s = {"","","","","","","","","","",""};
     	int x = 0;
+    	if(returnMe.size()==0) {
+    		return s;
+    	}
     	for(String str : returnMe) {
     		s[x] = str;
     		x++;

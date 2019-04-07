@@ -210,7 +210,14 @@ public class DataHandler {
 	 */
 	public static String[] getFriendsForUser(String username){
 		database.Database.createConnection();
-		return database.Database.getFriendsForUser(username);
+		try {
+			String[] sa = database.Database.getFriendsForUser(username);
+			return sa;
+		} catch (ArrayIndexOutOfBoundsException e) {
+			String[] s = {};
+			return s;
+		}
+
 	}
 	
 	public static boolean addFriendForUser(String username, String friend) {
@@ -236,6 +243,9 @@ public class DataHandler {
 	public static int getNumberOfFriends(String username) {
 		int returnValue = 0;
 		String[] friends = getFriendsForUser(username);
+		if(friends.length==0) {
+			return 0;
+		}
 		for(String s : friends) {
 			if(doesUserExist(s) && areFriends(s, username)) {
 				returnValue++;
@@ -333,7 +343,9 @@ public class DataHandler {
 	public static Vector<UserData> getTopThreeFriendsForUser(String username) {
 		Vector<UserData> dataToSort = new Vector<UserData>();
 		String[] friends = getFriendsForUser(username);
-		
+		if(getNumberOfFriends(username)==0) {
+			return dataToSort;
+		}
 		for (int i = 0; i < friends.length; i++) {
 			if(!friends[i].equals("")) {
 				String userGoalName = findUserGoal(friends[i]);
