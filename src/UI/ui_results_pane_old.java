@@ -10,12 +10,12 @@ import javafx.scene.text.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 
-public class ui_results_pane extends Pane {
+public class ui_results_pane_old extends Pane {
 
     private final ImageView img;
     private final Label lbl;
 
-    public ui_results_pane() {
+    public ui_results_pane_old() {
 
         img = new ImageView();
         lbl = new Label();
