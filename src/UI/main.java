@@ -128,7 +128,7 @@ public class main extends Application {
     }
 
     static void switchToResults() {
-        ui_results_pane_old pane_results = new ui_results_pane_old();
+        ui_results_pane pane_results = new ui_results_pane();
         Scene scene = new Scene(pane_results, 600, 400);
         scene.getStylesheets().add("UI/ui_results_stylesheet.css");
         stage.setScene(scene);

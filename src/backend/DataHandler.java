@@ -144,7 +144,7 @@ public class DataHandler {
 			//this might be thrown if the username does not exist in the database.
 			System.out.println("User does not exist.");
 		}
-		return -1;
+		return 0;
 	}
 	
 	/**
@@ -159,7 +159,7 @@ public class DataHandler {
 		try {
 			return sumColumn(goalName, "WORKOUTLOGS", username);
 		} catch (NullPointerException e) {
-			return -1;
+			return 0;
 		}
 	}
 	
@@ -283,6 +283,76 @@ public class DataHandler {
 		return false;
 	}
 	
+	public static int[][] getWorkoutsForUser(String username){
+		database.Database.createConnection();
+		int[][] returnArray = database.Database.getWorkoutsForUser(username);
+		return returnArray;
+	}
+	
+	public static int[] getMetricFromWorkoutHistory(String username, String metric) {
+		int arrayIndex = -1;
+		switch (metric) {
+			case "Steps" : arrayIndex = 0;
+				break;
+			case "Calories" : arrayIndex = 1;
+				break;
+			case "Water" : arrayIndex = 2;
+				break;
+			case "Exercise Duration" :  arrayIndex = 3;
+				break;
+		}
+		int[][] dummy = getWorkoutsForUser(username);
+		int[] returnArray = new int[30];
+		for(int i = 0; i<30;i++) {
+			returnArray[i] = dummy[i][arrayIndex];
+		}
+		return returnArray;
+	}
+	
+	public static String findUserGoal(String username) {
+		int[] goals = getUserGoals(username);
+		int goalIndex = -1;
+		try {
+		for(int i = 0; i < goals.length; i++) {
+			if(goals[i]!=0) {
+				goalIndex = i;
+			}
+		}
+		} catch(NullPointerException e) {
+		}
+		
+		switch(goalIndex) {
+			case 0 : return "steps";
+			case 1 : return "calories";
+			case 2 : return "water";
+			case 3 : return "duration";
+		}
+		return "";
+	}
+	
+	public static Vector<UserData> getTopThreeFriendsForUser(String username) {
+		Vector<UserData> dataToSort = new Vector<UserData>();
+		String[] friends = getFriendsForUser(username);
+		
+		for (int i = 0; i < friends.length; i++) {
+			if(!friends[i].equals("")) {
+				String userGoalName = findUserGoal(friends[i]);
+				int goalProgress = (int) ((double) getProgressForUser(userGoalName, friends[i])/((double) getGoalForUser(userGoalName, friends[i])) * 100);
+				dataToSort.add(new UserData(friends[i], goalProgress));
+				dataToSort = Operations.sort(dataToSort);
+			}
+		}
+		
+		Vector<UserData> returnVector = new Vector<UserData>();
+		try {
+			returnVector.add(dataToSort.get(0));
+			returnVector.add(dataToSort.get(1));
+			returnVector.add(dataToSort.get(2));
+		} catch (ArrayIndexOutOfBoundsException e) {
+		}
+		return returnVector;
+	}
+	
 	/**
 	 * @author tb791
 	 * This method is a driver method to test different features of the code and to eventually run the actual program.
@@ -301,49 +371,6 @@ public class DataHandler {
 		System.out.println("");
 		*/
 		
-		Vector<Integer> inputList = new Vector<Integer>();
-		String dataType = "";
-		/*
-		//generate random data
-		System.out.println("Populating array.");
-		dataType = "pseudo-random";
-		for(int i = 0; i<10000000; i++) {
-			inputList.add( (int)(Math.random()*10000000) );	//add 10 million values between 1 and 10 million.
-		}*/
-		
-		//generate totally unsorted data
-		/*
-		dataType = "totally unsorted";
-		int lastAddedNumber = 999999999;
-		for(int i = 0; i<10000000;) {
-			int numToAdd = (int) Math.random()*10000000;
-			if(numToAdd <= lastAddedNumber) {
-				inputList.add(numToAdd);
-				lastAddedNumber = numToAdd;
-				i++;
-			}
-		}
-		*/
-		
-		//generate totally sorted data
-		/*
-		int i = 0;
-		dataType = "totally sorted";
-		while(i < 10000000) {
-			inputList.add(i++);
-		}
-		*/
-		
-		
-		System.out.println("Size of array is " + inputList.size() + " (should be 10 million).");
-		System.out.println("Worst case 70 million swaps.");
-		
-		long startTime = System.nanoTime();
-		System.out.println("Started to sort "+dataType+" data.");
-		Operations.sort(inputList);
-		long endTime = System.nanoTime();
-		System.out.println("Finished sorting data.");
-		System.out.println("Method execution took " + (endTime - startTime)/1000000000 + " seconds (rounded).");
 	    UI.main.showUI();
 		
 	}

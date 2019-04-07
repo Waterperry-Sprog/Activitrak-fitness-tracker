@@ -126,10 +126,9 @@ public class Database {
 				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return -1;
+			// TODO Auto-generated catch 
+		} 
+    	return 0;
     }
     
     /**
@@ -217,11 +216,30 @@ public class Database {
 		}
     }
     
+    public static int[][] getWorkoutsForUser(String username){
+    	int[][] returnArray = new int[30][5];
+    	try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM WORKOUTLOGS WHERE USERNAME = '"+username+"'");
+			int y = 0;
+			while(rs.next()) {
+				for(int i = 2; i<6; i++) {
+					returnArray[y][i-2] = rs.getInt(i);
+				}
+				y++;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return returnArray;
+    }
+    
     /**
      * @author awpk21
      * This method closes the connection to the database (only used on a clean exit from the application).
      */
-    private static void shutdown() {
+     private static void shutdown() {
         try {
             if (stmt != null) {
                 stmt.close();

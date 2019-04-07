@@ -23,8 +23,7 @@ public class Graphics extends Application{
         xAxis.setLabel("Time /m");
         yAxis.setLabel("Heart Rate /bpm");
         
-        final LineChart<Number,Number> lineChart = 
-                new LineChart<Number,Number>(xAxis,yAxis);
+        final LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
         lineChart.setTitle("Sample HR vs. time graph");
 		
         XYChart.Series<Number,Number> series = new XYChart.Series<Number,Number>();

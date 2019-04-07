@@ -31,9 +31,9 @@ public class Operations {
 	}
 	
 	//from here, refactor
-	private static Vector<Integer> listToSort = new Vector<Integer>();
+	private static Vector<UserData> listToSort = new Vector<UserData>();
 	
-	public static Vector<Integer> sort(Vector<Integer> inputList) {
+	public static Vector<UserData> sort(Vector<UserData> inputList) {
 		if (inputList == null || inputList.size() == 0) {
 			return null;
 		}
@@ -66,16 +66,16 @@ public class Operations {
 		int i = lowerIndex;
 		int j = higherIndex;
 		// calculate pivot number, using middle number to reduce sort times for sorted lists
-		int pivot = listToSort.get( lowerIndex + (higherIndex-lowerIndex) / 2);
+		int pivot = listToSort.get( lowerIndex + (higherIndex-lowerIndex) / 2).getUserGoalProgress();
 		// Divide into two arrays
 		while (i <= j) {
 			//swap two numbers from each side of pivot.
 			//find next value to be swapped from lower half
-			while ( listToSort.get(i) < pivot ) {
+			while ( listToSort.get(i).getUserGoalProgress() > pivot ) {
 				i++;
 			}
 			//find next value to be swapped from upper half
-			while ( pivot < listToSort.get(j) ) {
+			while ( pivot > listToSort.get(j).getUserGoalProgress() ) {
 				j--;
 			}
 			if (i <= j) {

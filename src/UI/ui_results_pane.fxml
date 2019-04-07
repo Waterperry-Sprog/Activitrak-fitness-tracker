@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -18,6 +19,23 @@
             <Font size="64.0" />
          </font>
       </Label>
-      <Pane layoutX="173.0" layoutY="121.0" prefHeight="255.0" prefWidth="255.0" />
+      <ChoiceBox layoutX="39.0" layoutY="141.0" prefHeight="0.0" prefWidth="154.0" />
+      <LineChart layoutX="24.0" layoutY="184.0" prefHeight="177.0" prefWidth="265.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <BarChart layoutX="300.0" layoutY="184.0" prefHeight="177.0" prefWidth="256.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Label layoutX="357.0" layoutY="148.0" text="Friends' Results" />
    </children>
 </Pane>
