@@ -95,8 +95,8 @@ public class main extends Application {
         //app will be either 'apple', 'garmin', 'suunto'
     }
 
-    static void addFriend(String friend) {
-        backend.DataHandler.addFriendForUser(userID, friend);
+    static boolean addFriend(String friend) {
+        return backend.DataHandler.addFriendForUser(userID, friend);
     }
 
     static void unfriendUser(String username) {

@@ -213,17 +213,19 @@ public class DataHandler {
 		return database.Database.getFriendsForUser(username);
 	}
 	
-	public static void addFriendForUser(String username, String friend) {
+	public static boolean addFriendForUser(String username, String friend) {
 		database.Database.createConnection();
 		String[] friends = database.Database.getFriendsForUser(username);
 		for(String s : friends) {
 			if(s.equals(friend)) {
-				return;
+				return true;
 			}
 		}
 		if(database.Database.doesUserExist(friend)) {
 			database.Database.addFriendForUser(username, friend);
+			return true;
 		}
+		return false;
 	}
 	
 	public static void unfriend(String username, String friend) {

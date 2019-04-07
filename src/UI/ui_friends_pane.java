@@ -102,8 +102,14 @@ public class ui_friends_pane extends Pane {
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                if(!txtField_addFriend.getText().isEmpty()) {
-                    main.addFriend(txtField_addFriend.getText());
+                if( !txtField_addFriend.getText().isEmpty() && !txtField_addFriend.getText().equals(main.getUserID()) ) {
+                    if( !main.addFriend(txtField_addFriend.getText()) ) {
+                    	Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Sorry, we can't find that user.");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Please check the username you have entered and try again.");
+                        alert.showAndWait();
+                    }
                 }
                 if(!txtField_block.getText().isEmpty()) {
                     main.unfriendUser(txtField_block.getText());
