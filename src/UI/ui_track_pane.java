@@ -130,7 +130,6 @@ public class ui_track_pane extends Pane {
                     		dataToBeLogged[i] = Operations.toInt(entries[i]);
                     	}
                     }
-                    System.out.println(main.getUserID() +" "+ dataToBeLogged[0]+","+dataToBeLogged[1]+","+dataToBeLogged[2]+","+dataToBeLogged[3]);
                     backend.DataHandler.logWorkout(main.getUserID(), dataToBeLogged);
                 }
                 

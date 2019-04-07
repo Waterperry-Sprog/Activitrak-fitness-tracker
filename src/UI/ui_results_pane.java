@@ -118,30 +118,18 @@ public class ui_results_pane extends Pane {
 //        XYChart.Series personalData = new XYChart.Series();
           String userGoalName = backend.DataHandler.findUserGoal(main.getUserID());
           int goalProgress = (int) ((double) backend.DataHandler.getProgressForUser(userGoalName, main.getUserID())/(double) backend.DataHandler.getGoalForUser(userGoalName, main.getUserID()) * 100);
-//        personalData.setName(main.getUserID());
-//        personalData.getData().add(new XYChart.Data(main.getUserID(), goalProgress));
-//        
-//        XYChart.Series friendOne = new XYChart.Series();
-//        friendOne.setName(topFriends.get(0).getUsername());
-//        friendOne.getData().add(new XYChart.Data(topFriends.get(0).getUsername(), topFriends.get(0).getUserGoalProgress()));
-//        
-//        XYChart.Series friendTwo = new XYChart.Series();
-//        friendTwo.setName(topFriends.get(1).getUsername());
-//        friendTwo.getData().add(new XYChart.Data(topFriends.get(1).getUsername(), topFriends.get(1).getUserGoalProgress()));
-//        
-//        XYChart.Series friendThree = new XYChart.Series();
-//        friendThree.setName(topFriends.get(2).getUsername());
-//        friendThree.getData().add(new XYChart.Data(topFriends.get(2).getUsername(), topFriends.get(2).getUserGoalProgress()));
         XYChart.Series data = new XYChart.Series();
-        data.getData().add(new XYChart.Data(main.getUserID(), goalProgress));
-        data.getData().add(new XYChart.Data(topFriends.get(0).getUsername(), topFriends.get(0).getUserGoalProgress()));
-        data.getData().add(new XYChart.Data(topFriends.get(1).getUsername(), topFriends.get(1).getUserGoalProgress()));
-        data.getData().add(new XYChart.Data(topFriends.get(2).getUsername(), topFriends.get(2).getUserGoalProgress()));
-        
+        try {
+        	data.getData().add(new XYChart.Data(main.getUserID(), goalProgress));
+        	data.getData().add(new XYChart.Data(topFriends.get(0).getUsername(), topFriends.get(0).getUserGoalProgress()));
+        	data.getData().add(new XYChart.Data(topFriends.get(1).getUsername(), topFriends.get(1).getUserGoalProgress()));
+        	data.getData().add(new XYChart.Data(topFriends.get(2).getUsername(), topFriends.get(2).getUserGoalProgress()));
+        } catch (ArrayIndexOutOfBoundsException e) {
+        	
+        }
         
         barChart.setBarGap(1.0);
         barChart.setCategoryGap(1.0);
-//        barChart.getData().addAll(personalData, friendOne, friendTwo, friendThree);
         barChart.getData().add(data);
         
         btn.setOnAction(new EventHandler<ActionEvent>() {            
