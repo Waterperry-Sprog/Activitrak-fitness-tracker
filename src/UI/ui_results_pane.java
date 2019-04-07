@@ -70,7 +70,9 @@ public class ui_results_pane extends Pane {
         //TODO ADD GRAPHING FOR VIEWING GOAL RESULTS
         getChildren().add(img);
         getChildren().add(lbl);
-        getChildren().add(pieChart);
-
+        if(backend.DataHandler.hasUserSetGoal(main.getUserID())) {
+        	getChildren().add(pieChart);
+        }
+        
     }
 }

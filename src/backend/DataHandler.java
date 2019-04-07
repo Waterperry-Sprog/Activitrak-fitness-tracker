@@ -273,6 +273,16 @@ public class DataHandler {
 		return false;
 	}
 	
+	public static boolean hasUserSetGoal(String username) {
+		int[] goals = getUserGoals(username);
+		for(int i : goals) {
+			if(i!=0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * @author tb791
 	 * This method is a driver method to test different features of the code and to eventually run the actual program.
