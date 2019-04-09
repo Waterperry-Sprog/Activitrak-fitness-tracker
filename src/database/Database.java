@@ -105,7 +105,7 @@ public class Database {
     public static void logUserWorkout(String username, int[] metrics) {
     	try {
     		stmt = conn.createStatement();
-    		stmt.executeUpdate("INSERT INTO WORKOUTLOGS VALUES ('"+username+"', "+metrics[0]+", "+metrics[1]+", "+metrics[2]+", "+metrics[3]+")");
+    		stmt.executeUpdate("INSERT INTO WORKOUTLOGS VALUES ('"+username+"', "+metrics[0]+", "+metrics[1]+", "+metrics[2]+", "+metrics[3]+", "+metrics[4]+")");
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}

@@ -310,6 +310,8 @@ public class DataHandler {
 				break;
 			case "Exercise Duration" :  arrayIndex = 3;
 				break;
+			case "Weight" : arrayIndex = 4;
+				break;
 		}
 		int[][] dummy = getWorkoutsForUser(username);
 		int[] returnArray = new int[30];

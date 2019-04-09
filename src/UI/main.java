@@ -53,20 +53,20 @@ public class main extends Application {
         }
     }
 
-    static void signup(String username, String password, String password_Confirm) {
+    static boolean signup(String username, String password, String password_Confirm) {
     	Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        
     	try {
     		if(username.contains("'")||password.contains("'")) {
     			alert.setTitle("SQL Injection Detected.");
     	        alert.setHeaderText(null);
     	        alert.setContentText("Nice try.");
     	        alert.showAndWait();
-    			return;
+    			return false;
     		}
     		
     		if(password.contentEquals(password_Confirm)) {
     			DataHandler.addToDB(username,password);
+    			return true;
     		}
     		else {
     			alert.setTitle("Passwords do not match.");
@@ -80,6 +80,7 @@ public class main extends Application {
 	        alert.setContentText("Please enter a password.");
 	        alert.showAndWait();
     	}
+    	return false;
     }
 
     static void logout() {

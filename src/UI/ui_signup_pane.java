@@ -97,7 +97,13 @@ public class ui_signup_pane extends Pane {
                     alert.showAndWait();
             	}
             	else {
-            		main.signup(txtField.getText(), pwdField.getText(), pwdField_Confirm.getText());
+            		if(main.signup(txtField.getText(), pwdField.getText(), pwdField_Confirm.getText())) {
+            			Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Success.");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Your login has been created!");
+                        alert.showAndWait();
+            		}
             	}
             }
         });
