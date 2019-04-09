@@ -31,6 +31,20 @@ class quicksortTest {
 	}
 
 	@Test
+	void testSortOnZeroValues() {
+		String[] expected = {"subzero", "zero", "nonzero"};
+		String[] res = new String[3];
+		Vector<UserData> inputList = new Vector<UserData>();
+		inputList.add(new UserData("zero",0));
+		inputList.add(new UserData("nonzero",5));
+		inputList.add(new UserData("subzero",-1));
+		Vector<UserData> result = Operations.sort(inputList);
+		for(int i = 0; i<3; i++) {
+			res[i] = result.get(i).getUsername();
+		}
+	}
+	
+	@Test
 	void testSort() {
 		String name = "";
 		//set up vector array to be sorted.
