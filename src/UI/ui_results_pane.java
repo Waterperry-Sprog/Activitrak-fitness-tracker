@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
@@ -16,6 +17,7 @@ import java.lang.*;
 import java.util.Vector;
 
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class ui_results_pane extends Pane {
 
@@ -167,7 +169,9 @@ public class ui_results_pane extends Pane {
                 }
                 
             	for (int i = 0; i < workoutDataHistorical.size(); i++) {
-                  	series.getData().add( new LineChart.Data<Number,Number>( i, workoutDataHistorical.get(i)) );
+            		LineChart.Data<Number,Number> data = new LineChart.Data<Number,Number>( i, workoutDataHistorical.get(i));
+            		data.setNode(new HoveredThresholdNode(i, workoutDataHistorical.get(i)));
+            		series.getData().add( data);
           		  }
                
             	//update the x and y number lists and update the chart.
@@ -177,5 +181,50 @@ public class ui_results_pane extends Pane {
             	lineChart.getXAxis().setOpacity(0);
             }
         });
+        
+        //enable hovering to see data.
+        lineChart.setCursor(Cursor.CROSSHAIR);
+        
+        
+    }
+    //this class is from https://gist.github.com/jewelsea/4681797 and is not my own code.
+    /** a node which displays a value on hover, but is otherwise empty */
+    class HoveredThresholdNode extends StackPane {
+      HoveredThresholdNode(int priorValue, int value) {
+        setPrefSize(15, 15);
+
+        final Label label = createDataThresholdLabel(priorValue, value);
+
+        setOnMouseEntered(new EventHandler<MouseEvent>() {
+          @Override public void handle(MouseEvent mouseEvent) {
+            getChildren().setAll(label);
+            setCursor(Cursor.NONE);
+            toFront();
+          }
+        });
+        setOnMouseExited(new EventHandler<MouseEvent>() {
+          @Override public void handle(MouseEvent mouseEvent) {
+            getChildren().clear();
+            setCursor(Cursor.CROSSHAIR);
+          }
+        });
+      }
+
+      private Label createDataThresholdLabel(int priorValue, int value) {
+        final Label label = new Label(value + "");
+        label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
+        label.setStyle("-fx-font-size: 20; -fx-font-weight: bold;");
+
+        if (priorValue == 0) {
+          label.setTextFill(Color.DARKGRAY);
+        } else if (value > priorValue) {
+          label.setTextFill(Color.FORESTGREEN);
+        } else {
+          label.setTextFill(Color.FIREBRICK);
+        }
+
+        label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        return label;
+      }
     }
 }
