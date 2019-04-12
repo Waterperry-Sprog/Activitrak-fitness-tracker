@@ -122,9 +122,9 @@ public class ui_track_pane extends Pane {
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                if(!txtField_Calories.getText().isEmpty() || !txtField_Water.getText().isEmpty() || !txtField_Steps.getText().isEmpty() || !txtField_ExerciseDuration.getText().isEmpty()) {
-                    String[] entries = {txtField_Steps.getText(), txtField_Calories.getText(), txtField_Water.getText(), txtField_ExerciseDuration.getText()}; //REORDERED TO ALIGN WITH DB
-                    int[] dataToBeLogged = {0,0,0,0};
+                if(!txtField_Calories.getText().isEmpty() || !txtField_Water.getText().isEmpty() || !txtField_Steps.getText().isEmpty() || !txtField_ExerciseDuration.getText().isEmpty() || !txtField_Weight.getText().isEmpty()) {
+                    String[] entries = {txtField_Steps.getText(), txtField_Calories.getText(), txtField_Water.getText(), txtField_ExerciseDuration.getText(), txtField_Weight.getText()}; //REORDERED TO ALIGN WITH DB
+                    int[] dataToBeLogged = {0,0,0,0,0};
                     for (int i = 0; i< entries.length; i++) {
                     	if(!entries[i].isEmpty()) {
                     		dataToBeLogged[i] = Operations.toInt(entries[i]);

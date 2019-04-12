@@ -92,8 +92,9 @@ public class main extends Application {
     }
 
     static void appConnectInput(String app, String data) {
-        //TODO HANDLE CSV TEXT
-        //app will be either 'apple', 'garmin', 'suunto'
+        if(app.contentEquals("suunto")) {
+        	
+        }
     }
 
     static boolean addFriend(String friend) {

@@ -30,6 +30,7 @@ public class ui_results_pane extends Pane {
     private final BarChart barChart;
     private final Label label0;
     private final Button btn;
+    private final ToggleButton sortBtn;
 
     public ui_results_pane() {
 
@@ -46,7 +47,8 @@ public class ui_results_pane extends Pane {
         barChart = new BarChart(categoryAxis0, numberAxis0);
         label0 = new Label();
         btn = new Button();
-
+        sortBtn = new ToggleButton();
+        
         setMaxHeight(USE_PREF_SIZE);
         setMaxWidth(USE_PREF_SIZE);
         setMinHeight(USE_PREF_SIZE);
@@ -87,6 +89,12 @@ public class ui_results_pane extends Pane {
         btn.setPrefWidth(60);
         btn.setText("Update");
         
+        sortBtn.setLayoutX(260.0);
+        sortBtn.setLayoutY(141.0);
+        sortBtn.setPrefHeight(0.0);
+        sortBtn.setPrefWidth(30);
+        sortBtn.setText("'-.");
+        
         lineChart.setLayoutX(24.0);
         lineChart.setLayoutY(184.0);
         lineChart.setPrefHeight(177.0);
@@ -111,6 +119,7 @@ public class ui_results_pane extends Pane {
         getChildren().add(barChart);
         getChildren().add(label0);
         getChildren().add(btn);
+        getChildren().add(sortBtn);
         
         Vector<backend.UserData> topFriends = new Vector<backend.UserData>();
         topFriends = backend.DataHandler.getTopThreeFriendsForUser(main.getUserID());
@@ -118,13 +127,13 @@ public class ui_results_pane extends Pane {
 //        XYChart.Series personalData = new XYChart.Series();
           String userGoalName = backend.DataHandler.findUserGoal(main.getUserID());
           int goalProgress = (int) ((double) backend.DataHandler.getProgressForUser(userGoalName, main.getUserID())/(double) backend.DataHandler.getGoalForUser(userGoalName, main.getUserID()) * 100);
-        XYChart.Series data = new XYChart.Series();
-        try {
+          XYChart.Series data = new XYChart.Series();
+          try {
         	data.getData().add(new XYChart.Data(main.getUserID(), goalProgress));
         	data.getData().add(new XYChart.Data(topFriends.get(0).getUsername(), topFriends.get(0).getUserGoalProgress()));
         	data.getData().add(new XYChart.Data(topFriends.get(1).getUsername(), topFriends.get(1).getUserGoalProgress()));
         	data.getData().add(new XYChart.Data(topFriends.get(2).getUsername(), topFriends.get(2).getUserGoalProgress()));
-        } catch (ArrayIndexOutOfBoundsException e) {
+          } catch (ArrayIndexOutOfBoundsException e) {
         	
         }
         
@@ -135,8 +144,7 @@ public class ui_results_pane extends Pane {
         btn.setOnAction(new EventHandler<ActionEvent>() {            
             @Override
             public void handle(ActionEvent event){
-
-                final NumberAxis xAxis = new NumberAxis();
+            	final NumberAxis xAxis = new NumberAxis();
                 final NumberAxis yAxis = new NumberAxis();
                 LineChart.Series<Number,Number> series = new LineChart.Series<Number,Number>();
                 xAxis.setLabel("Workout");
@@ -145,17 +153,23 @@ public class ui_results_pane extends Pane {
                 //import int[] to a variable and then add every element to the workoutDataHistorical
                 int[] values = backend.DataHandler.getMetricFromWorkoutHistory(main.getUserID(), choiceBox.getValue().toString());
                 Vector<Integer> workoutDataHistorical = new Vector<Integer>();
-               
+                for(int i : values) {
+                	workoutDataHistorical.add(i);
+                }
+                
                 for(int i = 0; i < values.length; i++) {
                 	if(values[i] != 0) {
                 		workoutDataHistorical.add(values[i]);
                 	}
                 }
+                if(sortBtn.isSelected()) {
+                	workoutDataHistorical = backend.Operations.sortNumbers(workoutDataHistorical);
+                }
                 
             	for (int i = 0; i < workoutDataHistorical.size(); i++) {
                   	series.getData().add( new LineChart.Data<Number,Number>( i, workoutDataHistorical.get(i)) );
           		  }
-            	
+               
             	//update the x and y number lists and update the chart.
             	lineChart.getData().clear();
             	lineChart.getData().add(series);

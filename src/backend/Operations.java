@@ -30,16 +30,25 @@ public class Operations {
 		return (x%2 == 0)?(true):(false);
 	}
 	
-	//from here, refactor
 	private static Vector<UserData> listToSort = new Vector<UserData>();
+	private static Vector<Integer> intsToSort = new Vector<Integer>();
 	
 	public static Vector<UserData> sort(Vector<UserData> inputList) {
 		if (inputList == null || inputList.size() == 0) {
 			return null;
 		}
 		listToSort = inputList;
-		quickSort(0, listToSort.size() - 1);
+		quickSortUserData(0, listToSort.size() - 1);
 		return listToSort;
+	}
+	
+	public static Vector<Integer> sortNumbers(Vector<Integer> inputList) {
+		if (inputList == null || inputList.size() == 0) {
+			return null;
+		}
+		intsToSort = inputList;
+		quickSortNumbers(0, intsToSort.size() - 1);
+		return intsToSort;
 	}
 	
 	public static String hashPassword(String password){
@@ -62,7 +71,37 @@ public class Operations {
 		return DatatypeConverter.printHexBinary(data);
     }
 	
-	private static void quickSort(int lowerIndex, int higherIndex) {
+	private static void quickSortNumbers(int lowerIndex, int higherIndex) {
+		int i = lowerIndex;
+		int j = higherIndex;
+		// calculate pivot number, using middle number to reduce sort times for sorted lists
+		int pivot = intsToSort.get( lowerIndex + (higherIndex-lowerIndex) / 2);
+		// Divide into two arrays
+		while (i <= j) {
+			//swap two numbers from each side of pivot.
+			//find next value to be swapped from lower half
+			while ( intsToSort.get(i) > pivot ) {
+				i++;
+			}
+			//find next value to be swapped from upper half
+			while ( pivot > intsToSort.get(j) ) {
+				j--;
+			}
+			if (i <= j) {
+				Collections.swap(intsToSort, i, j);
+				i++;
+				j--;
+			}
+		}
+		// call quickSort() method recursively to divide array up into smaller arrays.
+		if (lowerIndex < j)
+		quickSortNumbers(lowerIndex, j);
+		if (i < higherIndex)
+		quickSortNumbers(i, higherIndex);
+		return;
+	}
+	
+	private static void quickSortUserData(int lowerIndex, int higherIndex) {
 		int i = lowerIndex;
 		int j = higherIndex;
 		// calculate pivot number, using middle number to reduce sort times for sorted lists
@@ -86,12 +125,13 @@ public class Operations {
 		}
 		// call quickSort() method recursively to divide array up into smaller arrays.
 		if (lowerIndex < j)
-		quickSort(lowerIndex, j);
+		quickSortUserData(lowerIndex, j);
 		if (i < higherIndex)
-		quickSort(i, higherIndex);
+		quickSortUserData(i, higherIndex);
 		return;
 	}
 
+	
 	public static boolean validateAsField(String fieldType, String fieldValue) {
 		boolean returnValue = true;
 		if(fieldType.contentEquals("number")) {

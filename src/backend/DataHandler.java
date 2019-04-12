@@ -384,7 +384,8 @@ public class DataHandler {
 		Graphics.display(time, heartRate);
 		System.out.println("");
 		*/
-		
+ 		
+ 		
 	    UI.main.showUI();
 		
 	}
