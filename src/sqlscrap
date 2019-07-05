@@ -1,0 +1,4 @@
+CREATE TABLE USERS (id int, username varchar(255))
+INSERT INTO USERS (id, username) VALUES (1, 'hello')
+SELECT * FROM USERS
+DROP TABLE USERS

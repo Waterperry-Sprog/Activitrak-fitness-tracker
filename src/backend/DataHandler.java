@@ -1,13 +1,7 @@
 package backend;
 
 import java.util.Vector;
-
-import UI.main;
-import UI.ui_login_pane;
 import java.io.*;
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class DataHandler {
 	
