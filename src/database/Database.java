@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.Vector;
 
 public class Database {
-    private static String dbURL = "jdbc:derby:C:\\Users\\tband\\OneDrive\\Documents\\GitHub\\CSED-2\\src\\database\\newDerby;create=false";	//change this to the required path
+    private static String dbURL = "jdbc:derby:<urlPath>";	//change this to the required path
     // jdbc Connection
     private static Connection conn = null;
     private static Statement stmt = null;
@@ -18,6 +18,7 @@ public class Database {
             conn = DriverManager.getConnection(dbURL); 
         }
         catch (Exception e) {
+        	e.printStackTrace();
         	System.out.println("ERROR [FATAL]: Application could not run at this time. Exiting...");
             System.exit(1);
         }
