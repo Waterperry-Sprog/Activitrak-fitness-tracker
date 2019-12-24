@@ -15,7 +15,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method adds a login entry to the userlogininfo table of the database.
 	 * @param username the username to be logged.
 	 * @param password the password as plain text to be logged.
@@ -26,7 +26,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method logs a workout using an int array and a username.
 	 * @param username the user whose workout is being logged.
 	 * @param metrics an int[] of metrics in the order: steps, calories, water, duration, weight.
@@ -37,7 +37,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * this method parses HR/time data from a Suunto CSV file. Apple Health, 
 	 * @param file the file to parse
 	 */
@@ -80,7 +80,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method authenticates a username and password pair by checking the userlogininfo database.
 	 * @param user the username to be checked.
 	 * @param password the plaintext password to be checked.
@@ -102,7 +102,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method gets an int array of the goals for a certain user. This method is really for internal use only.
 	 * @param username the user who set the goals being retrieved.
 	 * @return an int array by goals in the order steps, calories, water, duration, weight (only one entry should really be non-zero).
@@ -117,7 +117,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method gets a specific goal for a username rather than an int array like getUserGoals returns.
 	 * @param goalName the name of the goal (either steps, calories, water, duration, or weight).
 	 * @param username the user who set the goal.
@@ -142,7 +142,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method gets a user's progress towards the set/specified goal.
 	 * @param goalName the name of the goal which the user is progressing towards.
 	 * @param username the username of the user whose goal is being retrieved.
@@ -158,7 +158,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method is for internal use only. See database.Database.sumColumn for more information.
 	 * @param columnName See database.Database.sumColumn for more information.
 	 * @param tableName See database.Database.sumColumn for more information.
@@ -171,7 +171,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method is for internal use only. See database.Database.addGoal for more information.
 	 * @param username See database.Database.addGoal for more information.
 	 * @param goalName See database.Database.addGoal for more information.
@@ -362,7 +362,7 @@ public class DataHandler {
 	}
 	
 	/**
-	 * @author tb791
+	 * @author <redacted>
 	 * This method is a driver method to test different features of the code and to eventually run the actual program.
 	 * @param args command line arguments (shouldn't be any).
 	 */
